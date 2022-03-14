@@ -1,15 +1,15 @@
 <?php
 //posts a task to the database
-function post($conn, $taskLabel, $taskTitle)
+function post($conn, $taskTitle, $taskLabelId)
 {
 
-    $sql = "INSERT INTO tasks(taskLabel, taskTitle) VALUES ('$taskLabel', '$taskTitle');";
+    $sql = "INSERT INTO tbl_tasks(title, label_id) VALUES ('$taskTitle', '$taskLabelId');";
 
     if (mysqli_query($conn, $sql)) {
-        header("location: ../tasks.php?error=none&message=createsuccess");
+        header("location: ../kanban.php?error=none&message=createsuccess");
         exit();
     } else {
-        header("location: ../tasks.php?error=postnotadded");
+        header("location: ../kanban.php?errortasknotadded");
         exit();
     };
 };

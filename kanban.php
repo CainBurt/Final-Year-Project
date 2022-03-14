@@ -1,4 +1,8 @@
-<?php include_once 'navbar.php' ?>
+<?php
+include_once 'navbar.php';
+include_once 'scripts/tasks.php';
+$labels = getAllLabels()
+?>
 
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -15,7 +19,7 @@
                     <span aria-hidden="true">&times;</span>
             </div>
             <div class="modal-body">
-                <form action="scripts/createtask.php" method="post">
+                <form action="scripts/tasks.php" method="post">
                     <div class="form-group">
                         <label for="list-name" class="col-form-label">List:</label>
                         <input type="text" class="form-control list-name" id="list" name="list" readonly>
@@ -36,39 +40,39 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title d-inline-block">To Do</h5>
-                <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#taskModal" data-list="To Do"><span class="bi bi-plus"></span></button>
-                <hr>
-                <p class="card-text"></p>
+    <?php
+
+    foreach ($labels as $labelRow) {
+        $taskResult = getTasksByLabel($labelRow["id"]);
+    ?>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title d-inline-block"><?php echo $labelRow["label_name"]; ?></h5>
+                    <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#taskModal" data-list="<?php echo $labelRow["id"]; ?>"><span class="bi bi-plus"></span></button>
+                    <hr>
+                    <p class="card-text">
+                    <ul id="sort<?php echo $labelRow["id"]; ?>">
+                        <?php
+                        if (!empty($taskResult)) {
+                            foreach ($taskResult as $taskRow) {
+
+                        ?>
+                                <li><?php echo $taskRow["title"] ?></li>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </ul>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title d-inline-block">Doing</h5>
-                <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#taskModal" data-list="Doing"><span class="bi bi-plus"></span></button>
-                <hr>
-                <p class="card-text"></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title d-inline-block">Done</h5>
-                <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#taskModal" data-list="Done"><span class="bi bi-plus"></span></button>
-                <hr>
-                <p class="card-text"></p>
-
-            </div>
-        </div>
-    </div>
+    <?php
+    }
+    ?>
 </div>
 
 

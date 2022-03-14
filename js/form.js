@@ -18,8 +18,6 @@ $(function () {
       receive: function (e, ui) {
         var label_id = $(ui.item).parent(".sortable").data("label-id");
         var task_id = $(ui.item).data("task-id");
-        console.log(label_id);
-        console.log(task_id);
         $.ajax({
           url: url + "?label_id=" + label_id + "&task_id=" + task_id,
           success: function (response) {},

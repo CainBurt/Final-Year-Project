@@ -59,7 +59,7 @@ $labels = getAllLabels()
                             foreach ($taskResult as $taskRow) {
 
                         ?>
-                                <li class="cui-sortable-handle card" data-task-id="<?php echo $taskRow["id"]; ?>">
+                                <li class="ui-sortable-handle card mt-1" data-task-id="<?php echo $taskRow["id"]; ?>">
                                     <div class="card-body"><?php echo $taskRow["title"] ?></div>
                                 </li>
                         <?php

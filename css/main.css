@@ -1,0 +1,10 @@
+ul.sortable {
+  padding-left: 0;
+  list-style: none;
+  padding-top: 10px;
+}
+
+.ui-sortable-placeholder {
+  visibility: inherit !important;
+  background: rgb(214, 214, 214);
+}

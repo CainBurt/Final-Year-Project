@@ -32,4 +32,16 @@ if (isset($_POST["saveTask"])) {
             return $tasks;
         }
     }
+
+    function editTaskLabel($label_Id, $task_Id)
+    {
+        $query = "UPDATE tbl_tasks SET label_id=$label_Id WHERE id=$task_Id";
+        $result = mysqli_query(OpenCon(), $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $tasks[] = $row;
+            }
+            return $tasks;
+        }
+    }
 };

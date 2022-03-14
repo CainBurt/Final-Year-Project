@@ -53,13 +53,15 @@ $labels = getAllLabels()
                     <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#taskModal" data-list="<?php echo $labelRow["id"]; ?>"><span class="bi bi-plus"></span></button>
                     <hr>
                     <p class="card-text">
-                    <ul id="sort<?php echo $labelRow["id"]; ?>">
+                    <ul class="sortable ui-sortable" id="sort<?php echo $labelRow["id"]; ?>" data-label-id="<?php echo $labelRow["id"]; ?>">
                         <?php
                         if (!empty($taskResult)) {
                             foreach ($taskResult as $taskRow) {
 
                         ?>
-                                <li><?php echo $taskRow["title"] ?></li>
+                                <li class="cui-sortable-handle card" data-task-id="<?php echo $taskRow["id"]; ?>">
+                                    <div class="card-body"><?php echo $taskRow["title"] ?></div>
+                                </li>
                         <?php
                             }
                         }

@@ -17,6 +17,9 @@ if (isset($_POST["saveTask"])) {
     CloseCon($conn);
     exit();
 } elseif (isset($_POST["deleteTask"])) {
+    $taskId = $_POST["task-id"];
+    deleteTask(OpenCon(), $taskId);
+    CloseCon($conn);
 } else {
     function getAllLabels()
     {

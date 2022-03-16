@@ -17,13 +17,26 @@ function post($conn, $taskTitle, $taskLabelId)
 //edits a task in the database
 function updateTask($conn, $taskId, $updatedTitle)
 {
-    $query = "UPDATE tbl_tasks SET title='$updatedTitle' WHERE id='$taskId'";
+    $query = "UPDATE tbl_tasks SET title='$updatedTitle' WHERE id='$taskId';";
 
     if (mysqli_query($conn, $query)) {
         header("location: ../kanban.php?error=none&message=editsuccess");
         exit();
     } else {
-        header("location: ../kanban.php.php?error=postnotupdated");
+        header("location: ../kanban.php.php?error=tasknotupdated");
+        exit();
+    };
+}
+
+//deletes a task
+function deleteTask($conn, $taskId)
+{
+    $query = "DELETE FROM tbl_tasks WHERE id='$taskId';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../kanban.php?error=none&message=deletesuccess");
+        exit();
+    } else {
+        header("location: ../kanban.php.php?error=tasknotdeleted");
         exit();
     };
 }

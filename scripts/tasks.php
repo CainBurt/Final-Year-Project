@@ -1,13 +1,22 @@
 <?php
 require_once 'db_connection.php';
+require_once 'functions.php';
 
 if (isset($_POST["saveTask"])) {
-    require_once 'functions.php';
+
     $taskTitle = $_POST["task"];
     $taskLabelId = $_POST["list"];
     post(OpenCon(), $taskTitle, $taskLabelId);
     CloseCon($conn);
     exit();
+} elseif (isset($_POST["editTask"])) {
+
+    $taskId = $_POST["task-id"];
+    $updatedTitle = $_POST["task-title"];
+    updateTask(OpenCon(), $taskId, $updatedTitle);
+    CloseCon($conn);
+    exit();
+} elseif (isset($_POST["deleteTask"])) {
 } else {
     function getAllLabels()
     {

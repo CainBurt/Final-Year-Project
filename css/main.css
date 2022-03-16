@@ -8,3 +8,15 @@ ul.sortable {
   visibility: inherit !important;
   background: rgb(214, 214, 214);
 }
+
+.ui-sortable-handle:hover{
+  cursor: pointer;
+  filter: brightness(95%);
+}
+
+#showEdit {
+  display: none;
+}
+#taskCard:hover > #showEdit {
+  display: block; 
+}

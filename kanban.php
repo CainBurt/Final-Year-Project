@@ -39,6 +39,38 @@ $labels = getAllLabels()
     </div>
 </div>
 
+<!-- Edit and Delete Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Task</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form action="scripts/tasks.php" method="post">
+                    <div class="form-group">
+                        <label for="list-name" class="col-form-label">Task Id:</label>
+                        <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Task Name:</label>
+                        <input type="text" class="form-control task-title" id="task-title" name="task-title" placeholder="Task Title">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" name="editTask">Save Edit</button>
+                <button type="submit" class="btn btn-danger" name="deleteTask">Delete Task</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Labels and Tasks Within -->
 <div class="row">
     <?php
 
@@ -60,7 +92,9 @@ $labels = getAllLabels()
 
                         ?>
                                 <li class="ui-sortable-handle card mt-1" data-task-id="<?php echo $taskRow["id"]; ?>">
-                                    <div class="card-body"><?php echo $taskRow["title"] ?></div>
+                                    <div class="card-body" id="taskCard"><?php echo $taskRow["title"] ?>
+                                        <a class="bi bi-pencil-square float-right" id="showEdit" data-toggle="modal" data-target="#editModal" data-task="<?php echo $taskRow["id"]; ?>" data-title="<?php echo $taskRow["title"] ?>"></a>
+                                    </div>
                                 </li>
                         <?php
                             }

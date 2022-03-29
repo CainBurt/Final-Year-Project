@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/fontawesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
     </link>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -24,8 +24,7 @@
 <body>
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <img src="#" alt="logo" class="col-lg-1">
-        <a class="navbar-brand col me-0 px-3" href="#">Projects</a>
+        <a class="navbar-brand col me-0 px-3" href="/fyp/projects.php">Projects</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,9 +42,19 @@
 
     </header>
 
+    <!-- hides sidebar if on a projects page -->
+    <?php if ($_SERVER["REQUEST_URI"] == "/fyp/projects.php") { ?>
+        <style>
+            .sidebar {
+                display: none !important;
+            }
+        </style>
+    <?php } ?>
+
+
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="width: 100%;">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -53,11 +62,11 @@
                             <hr>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link active" aria-current="page" href="/fyp/tasks.php">
                                 <span data-feather="home"></span>
                                 Tasks
                             </a>
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link active" aria-current="page" href="/fyp/kanban.php">
                                 <span data-feather="home"></span>
                                 Kanban
                             </a>

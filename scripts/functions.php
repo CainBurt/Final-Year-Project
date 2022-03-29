@@ -40,3 +40,17 @@ function deleteTask($conn, $taskId)
         exit();
     };
 }
+
+//post project
+function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectEnd)
+{
+    $sql = "INSERT INTO tbl_projects(project_name, project_description, project_start, project_end) VALUES ('$projectName', '$projectDesc', '$projectStart', '$projectEnd');";
+
+    if (mysqli_query($conn, $sql)) {
+        header("location: ../kanban.php?error=none&message=createprojectsuccess");
+        exit();
+    } else {
+        header("location: ../project.php?error=projectnotadded");
+        exit();
+    };
+};

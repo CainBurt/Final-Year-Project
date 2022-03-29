@@ -1,12 +1,11 @@
 <?php
 include_once 'navbar.php';
 include_once 'scripts/tasks.php';
-$labels = getAllLabels()
 ?>
 
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Tasks</h1>
+    <h1 class="h2">Kanban Board</h1>
 </div>
 
 <!-- Task Modal Popup-->
@@ -73,7 +72,7 @@ $labels = getAllLabels()
 <!-- Labels and Tasks Within -->
 <div class="row">
     <?php
-
+    $labels = getAllLabels();
     foreach ($labels as $labelRow) {
         $taskResult = getTasksByLabel($labelRow["id"]);
     ?>
@@ -82,7 +81,7 @@ $labels = getAllLabels()
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title d-inline-block"><?php echo $labelRow["label_name"]; ?></h5>
-                    <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#taskModal" data-list="<?php echo $labelRow["id"]; ?>"><span class="bi bi-plus"></span></button>
+                    <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#taskModal" data-list="<?php echo $labelRow["id"]; ?>" data-name="<?php echo $labelRow["label_name"]; ?>"><span class="bi bi-plus"></span></button>
                     <hr>
                     <p class="card-text">
                     <ul class="sortable ui-sortable" id="sort<?php echo $labelRow["id"]; ?>" data-label-id="<?php echo $labelRow["id"]; ?>">

@@ -1,0 +1,40 @@
+/* Kanban Syling */
+
+ul.sortable {
+    padding-left: 0;
+    list-style: none;
+    padding-top: 10px;
+}
+
+.ui-sortable-placeholder {
+    visibility: inherit !important;
+    background: rgb(214, 214, 214);
+}
+
+.ui-sortable-handle:hover {
+    cursor: pointer;
+    filter: brightness(95%);
+}
+
+#showEdit {
+    display: none;
+}
+
+#taskCard:hover>#showEdit {
+    display: block;
+}
+
+
+/* sidebar styling */
+
+.sidebar {
+    min-height: calc(100vh - 50px);
+}
+
+
+/* project border */
+
+.new-project {
+    border: 3px dashed lightgray;
+    cursor: pointer;
+}

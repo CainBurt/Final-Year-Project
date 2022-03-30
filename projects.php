@@ -1,21 +1,7 @@
 <?php
 include_once 'navbar.php';
+include_once 'scripts/projects.php';
 ?>
-
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Projects</h1>
-</div>
-
-<div class="col-sm-3">
-    <div class="new-project card" data-toggle="modal" data-target="#projectModal">
-        <div class="card-body">
-            <p class="card-text">
-            <h2 class="text-center"><span class="bi bi-plus">New Project</span></h2>
-            </p>
-        </div>
-    </div>
-</div>
-
 <!-- New Project Modal -->
 <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -56,5 +42,42 @@ include_once 'navbar.php';
         </div>
     </div>
 </div>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Projects</h1>
+</div>
+
+<div class="col-sm-3">
+    <div class="new-project card" data-toggle="modal" data-target="#projectModal">
+        <div class="card-body">
+            <p class="card-text">
+            <h2 class="text-center"><span class="bi bi-plus">New Project</span></h2>
+            </p>
+        </div>
+    </div>
+</div>
+
+<?php
+$projects = getAllProjects();
+foreach ($projects as $project) {
+    $projectId = $project["id"];
+    $projectName = $project["project_name"];
+?>
+
+    <div class="col-sm-3">
+        <div class="card">
+            <a href="scripts/projects.php?projectid=<?php echo $projectId ?>&projectname=<?php echo $projectName ?>">
+                <div class="card-body">
+                    <p class="card-text">
+                    <h2 class="text-center"><?php echo $projectName ?></h2>
+                    </p>
+
+                </div>
+            </a>
+        </div>
+    </div>
+
+<?php } ?>
+
 
 <?php include_once 'footer.php' ?>

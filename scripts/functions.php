@@ -1,9 +1,10 @@
 <?php
+session_start();
 //posts a task to the database
 function post($conn, $taskTitle, $taskLabelId)
 {
-
-    $sql = "INSERT INTO tbl_tasks(title, label_id) VALUES ('$taskTitle', '$taskLabelId');";
+    $project = $_SESSION["projectid"];
+    $sql = "INSERT INTO tbl_tasks(title, label_id, project_id) VALUES ('$taskTitle', '$taskLabelId', '$project');";
 
     if (mysqli_query($conn, $sql)) {
         header("location: ../kanban.php?error=none&message=createsuccess");

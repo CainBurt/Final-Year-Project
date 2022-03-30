@@ -12,4 +12,21 @@ if (isset($_POST["saveProject"])) {
     saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd);
     CloseCon($conn);
     exit();
+} else if (isset($_GET["projectid"])) { //starts session with project variables
+    session_start();
+    $_SESSION['projectid'] = $_GET["projectid"];
+    $_SESSION['projectname'] = $_GET["projectname"];
+    header("location: ../kanban.php?projectvarinsession");
+} else {
+    function getAllProjects()
+    {
+        $query = "SELECT * FROM tbl_projects";
+        $result = mysqli_query(OpenCon(), $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $projects[] = $row;
+            }
+            return $projects;
+        }
+    }
 }

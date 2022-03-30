@@ -1,3 +1,4 @@
+<?php include_once 'scripts/tasks.php'; ?>
 <!doctype html>
 <html lang="en">
 
@@ -58,7 +59,7 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <h5 class="text-center">Project Name</h5>
+                            <h5 class="text-center"><?php echo $_SESSION['projectname'] ?></h5>
                             <hr>
                         </li>
                         <li class="nav-item">

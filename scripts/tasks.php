@@ -2,6 +2,7 @@
 require_once 'db_connection.php';
 require_once 'functions.php';
 
+
 if (isset($_POST["saveTask"])) {
 
     $taskTitle = $_POST["task"];
@@ -35,7 +36,8 @@ if (isset($_POST["saveTask"])) {
 
     function getTasksByLabel($labelId)
     {
-        $query = "SELECT * FROM tbl_tasks WHERE label_id=$labelId";
+        $project = $_SESSION["projectid"];
+        $query = "SELECT * FROM tbl_tasks WHERE label_id=$labelId AND project_id=$project";
         $result = mysqli_query(OpenCon(), $query);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {

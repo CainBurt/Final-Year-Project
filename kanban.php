@@ -108,6 +108,10 @@ include_once 'scripts/tasks.php';
     <?php
     }
     ?>
+
+    <?php
+    echo $_SESSION['projectid'] . " + " . $_SESSION['projectname'];
+    ?>
 </div>
 
 

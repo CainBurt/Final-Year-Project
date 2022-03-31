@@ -14,13 +14,25 @@ $(document).ready(function() {
     //shows the edit task modal and puts data into the inputs
     $("#editModal").on("show.bs.modal", function(event) {
         var button = $(event.relatedTarget);
-        var taskId = button.data("task")
-        var title = button.data("title")
+        var taskId = button.data("task");
+        var title = button.data("title");
         var modal = $(this);
         modal.find(".modal-title").text("Edit Task");
         modal.find(".modal-body input.task-id").val(taskId);
         modal.find(".modal-body input.task-title").val(title);
     });
+
+    //shows the data in the delete project modal
+    $("#deleteModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var projectId = button.data("project");
+        console.log(projectId);
+        var modal = $(this);
+        modal.find(".modal-body input.project").val(projectId);
+
+    });
+
+
 });
 
 //allows tasks to be moved between labels

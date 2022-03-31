@@ -1,5 +1,11 @@
+.projectClickable,
+.projectClickable:hover,
 button {
     all: unset;
+}
+
+body {
+    background-color: rgb(230, 230, 230);
 }
 
 
@@ -40,6 +46,45 @@ ul.sortable {
 /* project border */
 
 .new-project {
-    border: 3px dashed lightgray;
+    border: 4px dashed lightgray;
+    transition: transform 0.5s;
+}
+
+.project-card {
+    transition: transform 0.5s;
+}
+
+.new-project:hover,
+.project-card:hover {
     cursor: pointer;
+    background-color: rgb(238, 238, 238);
+    transform: scale(1.05);
+    transition: transform 0.5s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.project-body {
+    height: 20rem;
+}
+
+.card-footer {
+    height: 3rem;
+    overflow: hidden;
+}
+
+.footer-content {
+    display: none;
+}
+
+.project-card:hover>.card-footer>.footer-content {
+    display: block;
+}
+
+.new-project .project-body {
+    height: 23rem;
+}
+
+#deleteProject:hover {
+    cursor: pointer;
+    color: gray;
 }

@@ -48,10 +48,23 @@ function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectE
     $sql = "INSERT INTO tbl_projects(project_name, project_description, project_start, project_end) VALUES ('$projectName', '$projectDesc', '$projectStart', '$projectEnd');";
 
     if (mysqli_query($conn, $sql)) {
-        header("location: ../kanban.php?error=none&message=createprojectsuccess");
+        header("location: ../projects.php?error=none&message=createprojectsuccess");
         exit();
     } else {
-        header("location: ../project.php?error=projectnotadded");
+        header("location: ../projects.php?error=projectnotadded");
+        exit();
+    };
+};
+
+function deleteProject($conn, $projectId)
+{
+    $query = "DELETE FROM tbl_projects WHERE id='$projectId';";
+
+    if (mysqli_query($conn, $query)) {
+        header("location: ../projects.php?error=none&message=projectdeleted");
+        exit();
+    } else {
+        header("location: ../projects.php?error=projectnotdeleted");
         exit();
     };
 };

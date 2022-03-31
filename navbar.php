@@ -43,8 +43,12 @@
 
     </header>
 
-    <!-- hides sidebar if on a projects page -->
-    <?php if ($_SERVER["REQUEST_URI"] == "/fyp/projects.php") { ?>
+
+    <?php
+    // hides sidebar if on a projects page
+    $url = $_SERVER["REQUEST_URI"];
+    if (strpos($url, "/fyp/projects.php") !== false) {
+    ?>
         <style>
             .sidebar {
                 display: none !important;
@@ -80,5 +84,13 @@
                     </ul>
                 </div>
             </nav>
+            <?php
+            // col length if on a projects page
+            $url = $_SERVER["REQUEST_URI"];
+            if (strpos($url, "/fyp/projects.php") !== false) {
+            ?>
+                <main class="col-md-9 ms-sm-auto col-lg-12 px-md-4 ">
+                <?php } else { ?>
+                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <?php   } ?>

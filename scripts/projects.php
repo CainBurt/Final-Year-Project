@@ -12,6 +12,11 @@ if (isset($_POST["saveProject"])) {
     saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd);
     CloseCon($conn);
     exit();
+} else if (isset($_POST["deleteProject"])) {
+
+    $projectId = $_POST["delProjectId"];
+    deleteProject(OpenCon(), $projectId);
+    CloseCon($conn);
 } else if (isset($_GET["projectid"])) { //starts session with project variables
     session_start();
     $_SESSION['projectid'] = $_GET["projectid"];
@@ -29,4 +34,8 @@ if (isset($_POST["saveProject"])) {
             return $projects;
         }
     }
+}
+
+if (isset($_DELETE["deleteProject"])) {
+    echo "DLETE THIS PROJECT?";
 }

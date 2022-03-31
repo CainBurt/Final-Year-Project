@@ -43,41 +43,77 @@ include_once 'scripts/projects.php';
     </div>
 </div>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Projects</h1>
-</div>
+<!-- delete modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Are you sure you want to delete this project?</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                This will delete all data associated with this project.
+                <form action="scripts/projects.php" method="post">
+                    <input type="text" class="form-control project" id="delProjectId" name="delProjectId" readonly hidden>
+            </div>
 
-<div class="col-sm-3">
-    <div class="new-project card" data-toggle="modal" data-target="#projectModal">
-        <div class="card-body">
-            <p class="card-text">
-            <h2 class="text-center"><span class="bi bi-plus">New Project</span></h2>
-            </p>
+            <div class="modal-footer d-flex justify-content-center">
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-success" name="deleteProject">Yes</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
 
-<?php
-$projects = getAllProjects();
-foreach ($projects as $project) {
-    $projectId = $project["id"];
-    $projectName = $project["project_name"];
-?>
 
-    <div class="col-sm-3">
-        <div class="card">
-            <a href="scripts/projects.php?projectid=<?php echo $projectId ?>&projectname=<?php echo $projectName ?>">
-                <div class="card-body">
-                    <p class="card-text">
-                    <h2 class="text-center"><?php echo $projectName ?></h2>
-                    </p>
-
-                </div>
-            </a>
+<div class="row">
+    <!-- New project card -->
+    <div class="col-sm-3 mt-4">
+        <div class="new-project card shadow" data-toggle="modal" data-target="#projectModal">
+            <div class="project-body card-body d-flex justify-content-center align-items-center">
+                <p class="card-text">
+                <h2 class="text-center"><span class="bi bi-plus">New Project</span></h2>
+                </p>
+            </div>
         </div>
     </div>
 
-<?php } ?>
 
+
+    <?php
+    $projects = getAllProjects();
+    foreach ($projects as $project) {
+        $projectId = $project["id"];
+        $projectName = $project["project_name"];
+    ?>
+
+        <!-- exisiting projects cards -->
+        <div class="col-sm-3 mt-4">
+            <div class="project-card card shadow">
+                <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $projectId ?>&projectname=<?php echo $projectName ?>">
+                    <div class="project-body card-body d-flex justify-content-center align-items-center">
+                        <p class="card-text">
+                        <h2 class="text-center"><?php echo $projectName ?></h2>
+                        </p>
+
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="footer-content">
+                            <a class="bi bi-trash float-left" id="deleteProject" data-toggle="modal" data-target="#deleteModal" data-project="<?php echo $projectId ?>"></a>
+                            <a class="bi bi-pencil-square float-right" id="editProject"></a>
+                        </div>
+                    </div>
+
+                </a>
+
+            </div>
+        </div>
+
+    <?php } ?>
+
+</div>
 
 <?php include_once 'footer.php' ?>

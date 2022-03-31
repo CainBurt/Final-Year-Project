@@ -8,6 +8,14 @@ body {
     background-color: rgb(230, 230, 230);
 }
 
+.white {
+    color: white;
+}
+
+.red {
+    background-color: #B20D30;
+}
+
 
 /* Kanban Syling */
 
@@ -48,17 +56,19 @@ ul.sortable {
 .new-project {
     border: 4px dashed lightgray;
     transition: transform 0.5s;
+    border-radius: 1em;
 }
 
 .project-card {
     transition: transform 0.5s;
+    border-radius: 1em;
 }
 
 .new-project:hover,
 .project-card:hover {
     cursor: pointer;
     background-color: rgb(238, 238, 238);
-    transform: scale(1.05);
+    transform: scale(0.95);
     transition: transform 0.5s;
     box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
@@ -87,4 +97,8 @@ ul.sortable {
 #deleteProject:hover {
     cursor: pointer;
     color: gray;
+}
+
+.btn-block+.btn-block {
+    margin-top: .5rem;
 }

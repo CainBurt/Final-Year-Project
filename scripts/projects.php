@@ -12,6 +12,14 @@ if (isset($_POST["saveProject"])) {
     saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd);
     CloseCon($conn);
     exit();
+} else if (isset($_POST["saveEditProject"])) {
+    $id = $_POST["projectId"];
+    $title = $_POST["projectName"];
+    $desc = $_POST["projectDesc"];
+    $start = $_POST["projectStart"];
+    $end = $_POST["projectEnd"];
+    updateProject(OpenCon(), $id, $title, $desc, $start, $end);
+    CloseCon($conn);
 } else if (isset($_POST["deleteProject"])) {
 
     $projectId = $_POST["delProjectId"];

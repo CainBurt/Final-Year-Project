@@ -32,6 +32,22 @@ $(document).ready(function() {
 
     });
 
+    //shows the edit project modal and puts data into the inputs
+    $("#editProjectModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data("id");
+        var title = button.data("title");
+        var desc = button.data("desc");
+        var start = button.data("start");
+        var end = button.data("end");
+        var modal = $(this);
+        modal.find(".modal-body input.project-id").val(id);
+        modal.find(".modal-body input.project-name").val(title);
+        modal.find(".modal-body textarea.project-desc").val(desc);
+        modal.find(".modal-body input.project-start").val(start);
+        modal.find(".modal-body input.project-end").val(end);
+    });
+
 
 });
 

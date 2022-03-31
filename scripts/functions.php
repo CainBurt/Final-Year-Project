@@ -56,6 +56,7 @@ function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectE
     };
 };
 
+//delete project
 function deleteProject($conn, $projectId)
 {
     $query = "DELETE FROM tbl_projects WHERE id='$projectId';";
@@ -68,3 +69,16 @@ function deleteProject($conn, $projectId)
         exit();
     };
 };
+
+//edit project
+function updateProject($conn, $id, $title, $desc, $start, $end)
+{
+    $query = "UPDATE tbl_projects SET project_name='$title', project_description='$desc', project_start='$start', project_end='$end' WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../projects.php?error=none&message=projectupdated");
+        exit();
+    } else {
+        header("location: ../projects.php?error=projectnotupdated");
+        exit();
+    };
+}

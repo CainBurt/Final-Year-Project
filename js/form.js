@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    SidebarCollapse();
     //shows the create task modal and puts data into the inputs
     $("#taskModal").on("show.bs.modal", function(event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
@@ -49,6 +50,8 @@ $(document).ready(function() {
     });
 
 
+
+
 });
 
 //allows tasks to be moved between labels
@@ -75,3 +78,15 @@ $(document).on('click', '#showEdit', function() {
     var task = $('#showEdit').parent().text();
     console.log(taskid, task);
 })
+
+// Collapse click
+$(document).on('click', '[data-toggle=collapse]', function() {
+    SidebarCollapse();
+})
+
+function SidebarCollapse() {
+    $('.menu-collapsed').toggleClass('d-none');
+    $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
+    $('#projectName').toggleClass('acronym acronym-collapsed');
+
+}

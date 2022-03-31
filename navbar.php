@@ -25,11 +25,10 @@
 <body>
 
     <header class="navbar navbar-dark sticky-top red flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col me-0 px-3" href="/fyp/projects.php"><strong>Projects</strong></a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
+        <a id="toggleSidebar" class="pl-3" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars white"></i>
+        </a>
+        <a class="navbar-brand col me-0 px-3" href="/fyp/projects.php"><strong>All Projects</strong></a>
 
         <div class="text-secondary nav-item">
             <a href="#"><i class="px-3 fa-solid fa-gear white"></i></a>
@@ -39,6 +38,13 @@
 
     </header>
 
+    <?php
+    //acronym creator of project name
+    if (preg_match_all('/\b(\w)/', strtoupper($_SESSION['projectname']), $m)) {
+        $acronym = implode('', $m[1]);
+    }
+    ?>
+
 
     <?php
     // hides sidebar if on a projects page
@@ -46,44 +52,50 @@
     if (strpos($url, "/fyp/projects.php") !== false) {
     ?>
         <style>
-            .sidebar {
+            #sidebar-container {
+                display: none !important;
+            }
+
+            #toggleSidebar {
                 display: none !important;
             }
         </style>
     <?php } ?>
 
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="width: 100%;">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <h5 class="text-center"><?php echo $_SESSION['projectname'] ?></h5>
-                            <hr>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/fyp/kanban.php">
-                                <i class="fa-solid fa-bars-progress"></i>
-                                Kanban
-                            </a>
-                            <a class="nav-link active" aria-current="page" href="/fyp/tasks.php">
-                                <i class="fa-solid fa-list-check"></i>
-                                Tasks
-                            </a>
+    <div class="row" id="body-row">
+        <nav id="sidebar-container" class="sidebar-expanded d-none d-md-block bg-light">
 
+            <ul class="list-group">
+                <li class="nav-item">
+                    <h5 class="text-center pt-3 menu-collapsed"><?php echo $_SESSION['projectname'] ?></h5>
+                    <h5 id="projectName" class="text-center pt-3 acronym"><?php echo $acronym ?></h5>
+                    <hr>
+                </li>
 
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <?php
-            // col length if on a projects page
-            $url = $_SERVER["REQUEST_URI"];
-            if (strpos($url, "/fyp/projects.php") !== false) {
-            ?>
-                <main class="col-md-9 ms-sm-auto col-lg-12 px-md-4 ">
-                <?php } else { ?>
-                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <a href="/fyp/kanban.php" class="list-group-item list-group-item-action bg-light border-0">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa-solid fa-bars-progress fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Kanban</span>
+                    </div>
+                </a>
 
-                    <?php   } ?>
+                <a href="/fyp/tasks.php" class="list-group-item list-group-item-action bg-light border-0">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-tasks fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Tasks</span>
+                    </div>
+                </a>
+            </ul>
+
+        </nav>
+        <?php
+        // col length if on a projects page
+        $url = $_SERVER["REQUEST_URI"];
+        if (strpos($url, "/fyp/projects.php") !== false) {
+        ?>
+            <main class="col p-4">
+            <?php } else { ?>
+                <main class="col p-4">
+
+                <?php   } ?>

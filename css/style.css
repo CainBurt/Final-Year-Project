@@ -17,7 +17,7 @@ body {
 }
 
 
-/* Kanban Syling */
+/**** Kanban Syling ****/
 
 ul.sortable {
     padding-left: 0;
@@ -44,14 +44,46 @@ ul.sortable {
 }
 
 
-/* sidebar styling */
+/**** sidebar styling ****/
 
-.sidebar {
-    min-height: calc(100vh - 50px);
+#body-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#sidebar-container {
+    min-height: 100vh;
+    padding: 0;
 }
 
 
-/* project border */
+/* Sidebar sizes when expanded and expanded */
+
+.sidebar-expanded {
+    width: 230px;
+}
+
+.sidebar-collapsed {
+    width: 60px;
+}
+
+
+/* hide project acryonm on expand */
+
+.acronym {
+    display: none;
+}
+
+
+/* Menu item*/
+
+#sidebar-container .list-group a {
+    height: 50px;
+    color: black;
+}
+
+
+/***** project border ****/
 
 .new-project {
     border: 4px dashed lightgray;

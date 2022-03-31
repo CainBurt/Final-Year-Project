@@ -17,8 +17,9 @@ include_once 'scripts/tasks.php';
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
             </div>
-            <div class="modal-body">
-                <form action="scripts/tasks.php" method="post">
+            <form action="scripts/tasks.php" method="post">
+                <div class="modal-body">
+
                     <div class="form-group">
                         <label for="list-name" class="col-form-label">List:</label>
                         <input type="text" class="form-control list-name" id="list" name="list" readonly>
@@ -28,11 +29,11 @@ include_once 'scripts/tasks.php';
                         <input type="text" class="form-control" id="task" name="task" placeholder="Task Title">
                     </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success" name="saveTask">Save</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" name="saveTask">Save</button>
+                </div>
             </form>
         </div>
     </div>
@@ -47,8 +48,9 @@ include_once 'scripts/tasks.php';
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
             </div>
-            <div class="modal-body">
-                <form action="scripts/tasks.php" method="post">
+            <form action="scripts/tasks.php" method="post">
+                <div class="modal-body">
+
                     <div class="form-group">
                         <label for="list-name" class="col-form-label">Task Id:</label>
                         <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly>
@@ -58,16 +60,17 @@ include_once 'scripts/tasks.php';
                         <input type="text" class="form-control task-title" id="task-title" name="task-title" placeholder="Task Title">
                     </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success" name="editTask">Save Edit</button>
-                <button type="submit" class="btn btn-danger" name="deleteTask">Delete Task</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" name="editTask">Save Edit</button>
+                    <button type="submit" class="btn btn-danger" name="deleteTask">Delete Task</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- Labels and Tasks Within -->
 <div class="row">

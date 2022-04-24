@@ -2,6 +2,7 @@
 include_once 'navbar.php';
 include_once 'scripts/projects.php';
 ?>
+
 <!-- New Project Modal -->
 <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

@@ -33,16 +33,20 @@
         <div class="text-secondary nav-item">
             <a href="#"><i class="px-3 fa-solid fa-gear white"></i></a>
             <a href="#"><i class="px-3 fa-solid fa-user white"></i></a>
-            <a href="/fyp"><i class="px-3 fa-solid fa-arrow-right-from-bracket white"></i></a>
+            <a href="/fyp/scripts/logout.php"><i class="px-3 fa-solid fa-arrow-right-from-bracket white"></i></a>
         </div>
 
     </header>
 
     <?php
+
     //acronym creator of project name
-    if (preg_match_all('/\b(\w)/', strtoupper($_SESSION['projectname']), $m)) {
-        $acronym = implode('', $m[1]);
+    if (isset($_SESSION['projectname'])) {
+        if (preg_match_all('/\b(\w)/', strtoupper($_SESSION['projectname']), $m)) {
+            $acronym = implode('', $m[1]);
+        }
     }
+
     ?>
 
 

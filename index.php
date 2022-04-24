@@ -39,72 +39,71 @@
                     <div class="tab-content card-body">
                         <div class="tab-pane fade show active card-body" id="login-form">
 
-                            <form>
+                            <form id="loginForm" action="scripts/user.php" method="post">
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="loginName" class="form-control" />
-                                    <label class="form-label" for="loginName">Email</label>
+                                    <input type="email" id="loginEmail" name="loginEmail" class="form-control" />
+                                    <label class="form-label" for="loginEmail">Email</label>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="loginPassword" class="form-control" />
+                                    <input type="password" id="loginPassword" name="loginPassword" class="form-control" />
                                     <label class="form-label" for="loginPassword">Password</label>
                                 </div>
 
-                                <!-- 2 column grid layout -->
-                                <div class="">
-                                    <!-- Checkbox -->
+                                <!-- Checkbox -->
+                                <!-- <div class="">
                                     <div class="form-check mb-3 mb-md-0">
                                         <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
                                         <label class="form-check-label" for="loginCheck"> Remember me </label>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- Submit button -->
                                 <div class="d-flex">
-                                    <button type="submit" class="btn btn-danger flex-grow-1">Sign in</button>
+                                    <button type="submit" class="btn btn-danger flex-grow-1" name="login">Sign in</button>
                                 </div>
 
                             </form>
                         </div>
                         <!-- register form -->
                         <div class="tab-pane fade card-body" id="register-form">
-                            <form>
+                            <form id="registerForm" action="scripts/user.php" method="post">
 
                                 <!-- Name input -->
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="registerName" class="form-control" />
+                                    <input type="text" id="registerName" name="registerName" class="form-control" />
                                     <label class="form-label" for="registerName">Name</label>
                                 </div>
 
-                                <!-- Username input -->
+                                <!-- Surname input -->
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="registerUsername" class="form-control" />
-                                    <label class="form-label" for="registerUsername">Surname</label>
+                                    <input type="text" id="registerSurname" name="registerSurname" class="form-control" />
+                                    <label class="form-label" for="registerSurname">Surname</label>
                                 </div>
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="registerEmail" class="form-control" />
+                                    <input type="email" id="registerEmail" name="registerEmail" class="form-control" />
                                     <label class="form-label" for="registerEmail">Email</label>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="registerPassword" class="form-control" />
+                                    <input type="password" id="registerPassword" name="registerPassword" class="form-control" />
                                     <label class="form-label" for="registerPassword">Password</label>
                                 </div>
 
                                 <!-- Repeat Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="registerRepeatPassword" class="form-control" />
-                                    <label class="form-label" for="registerRepeatPassword">Confirm password</label>
+                                    <input type="password" id="registerConfirmPassword" name="registerConfirmPassword" class="form-control" />
+                                    <label class="form-label" for="registerConfirmPassword">Confirm password</label>
                                 </div>
 
                                 <!-- Submit button -->
                                 <div class="d-flex">
-                                    <button type="submit" class="btn btn-danger flex-grow-1">Create Account</button>
+                                    <button type="submit" class="btn btn-danger flex-grow-1" name="createAccount">Create Account</button>
                                 </div>
                             </form>
                         </div>

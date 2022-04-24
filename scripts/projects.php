@@ -4,10 +4,10 @@ require_once 'functions.php';
 
 // save project to database
 if (isset($_POST["saveProject"])) {
-    $projectName = $_POST["projectName"];
-    $projectDesc = $_POST["projectDesc"];
-    $projectStart = $_POST["projectStart"];
-    $projectEnd = $_POST["projectEnd"];
+    $projectName = sanitiseInputs($_POST["projectName"]);
+    $projectDesc = sanitiseInputs($_POST["projectDesc"]);
+    $projectStart = sanitiseInputs($_POST["projectStart"]);
+    $projectEnd = sanitiseInputs($_POST["projectEnd"]);
 
     saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd);
     CloseCon($conn);

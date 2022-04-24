@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+//sanitise inputs
+function sanitiseInputs($input){
+    $input = strip_tags($input);
+    $input = trim($input);
+    $input = stripslashes($input);
+    $input = htmlspecialchars($input);
+    return $input;
+};
+
+
 //posts a task to the database
 function post($conn, $taskTitle, $taskLabelId)
 {
@@ -82,3 +93,5 @@ function updateProject($conn, $id, $title, $desc, $start, $end)
         exit();
     };
 }
+
+

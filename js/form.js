@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    SidebarCollapse();
+    // SidebarCollapse();
+
     //shows the create task modal and puts data into the inputs
     $("#taskModal").on("show.bs.modal", function(event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
@@ -90,3 +91,24 @@ function SidebarCollapse() {
     $('#projectName').toggleClass('acronym acronym-collapsed');
 
 }
+
+//login and register forms
+$(function() {
+
+    $('#login').click(function(e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register').click(function(e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login').removeClass('active');
+        $(this).addClass('active');
+        $("#register-form").addClass('show');
+        e.preventDefault();
+    });
+
+});

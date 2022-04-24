@@ -16,21 +16,21 @@ include_once 'scripts/projects.php';
 
                     <div class="form-group">
                         <label>Project Name:</label>
-                        <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name">
+                        <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" required>
                     </div>
                     <div class="form-group">
                         <label>Project Description:</label>
-                        <textarea type="textarea" class="form-control" id="projectDesc" name="projectDesc" placeholder="Project Description"></textarea>
+                        <textarea type="textarea" class="form-control" id="projectDesc" name="projectDesc" placeholder="Project Description" required></textarea>
                     </div>
                     <div class="form-group row">
                         <div class="col">
                             <label>Start Date:</label>
-                            <input type="date" class="form-control" id="projectStart" name="projectStart" value="<?php echo date('Y-m-d'); ?>">
+                            <input type="date" class="form-control" id="projectStart" name="projectStart" value="<?php echo date('Y-m-d'); ?>" required>
                         </div>
 
                         <div class="col">
                             <label>End Date:</label>
-                            <input type="date" class="form-control" id="projectEnd" name="projectEnd" value="<?php echo date('Y-m-d'); ?>">
+                            <input type="date" class="form-control" id="projectEnd" name="projectEnd" value="<?php echo date('Y-m-d'); ?>" required>
                         </div>
 
                     </div>
@@ -144,7 +144,7 @@ include_once 'scripts/projects.php';
     ?>
 
         <!-- exisiting projects cards -->
-        <div class="col-3 mt-4">
+        <div class="col-sm-3 mt-4">
             <div class="project-card card shadow">
                 <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $projectId ?>&projectname=<?php echo $projectName ?>">
                     <div class="project-body card-body d-flex justify-content-center align-items-center">

@@ -134,3 +134,18 @@ ul.sortable {
 .btn-block+.btn-block {
     margin-top: .5rem;
 }
+
+
+/* login and register */
+
+.nav-link {
+    color: #B20D30;
+}
+
+.nav-link:hover {
+    color: red;
+}
+
+.nav-pills>li>a.active {
+    background-color: #B20D30 !important;
+}

@@ -33,7 +33,7 @@
         <div class="text-secondary nav-item">
             <a href="#"><i class="px-3 fa-solid fa-gear white"></i></a>
             <a href="#"><i class="px-3 fa-solid fa-user white"></i></a>
-            <a href="#"><i class="px-3 fa-solid fa-arrow-right-from-bracket white"></i></a>
+            <a href="/fyp"><i class="px-3 fa-solid fa-arrow-right-from-bracket white"></i></a>
         </div>
 
     </header>

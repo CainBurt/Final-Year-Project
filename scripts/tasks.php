@@ -41,6 +41,13 @@ if (isset($_POST["saveTask"])) {
     $taskId = $_POST["task-id"];
     deleteSubtask(OpenCon(), $taskId);
     CloseCon($conn);
+} elseif (isset($_POST["changeUser"])) {
+    $taskId = $_POST["task-id"];
+    $userId = $_POST["user"];
+    debug_to_console($taskId);
+    debug_to_console($userId);
+    changeUserInTask(OpenCon(), $taskId, $userId);
+    CloseCon($conn);
 } else {
     function getAllLabels()
     {

@@ -250,3 +250,20 @@ function deleteSubtask($conn, $taskId)
         exit();
     };
 }
+
+//changes user assigned to a task
+function changeUserInTask($conn, $taskId, $userId)
+{
+    if ($userId == "NULL") {
+        $userId = NULL;
+    }
+    $query = "UPDATE tbl_tasks SET assigned_user_id='$userId' WHERE id='$taskId';";
+
+    if (mysqli_query($conn, $query)) {
+        header("location: ../tasks.php?error=none&message=changeusersuccess");
+        exit();
+    } else {
+        header("location: ../tasks.php.php?error=changeusernotupdated");
+        exit();
+    };
+}

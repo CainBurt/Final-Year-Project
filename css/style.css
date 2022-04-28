@@ -185,3 +185,7 @@
     .task-page-card:hover {
         cursor: pointer;
     }
+    
+    .subtask {
+        background-color: #c4c4c4;
+    }

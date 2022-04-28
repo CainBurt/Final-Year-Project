@@ -7,7 +7,7 @@ if (isset($_POST["saveTask"])) {
 
     $taskTitle = $_POST["task"];
     $taskLabelId = $_POST["list"];
-    post(OpenCon(), $taskTitle, $taskLabelId);
+    createTask(OpenCon(), $taskTitle, $taskLabelId);
     CloseCon($conn);
     exit();
 } elseif (isset($_POST["editTask"])) {
@@ -20,6 +20,22 @@ if (isset($_POST["saveTask"])) {
 } elseif (isset($_POST["deleteTask"])) {
     $taskId = $_POST["task-id"];
     deleteTask(OpenCon(), $taskId);
+    CloseCon($conn);
+} elseif (isset($_POST["createSubtask"])) {
+    $taskId = sanitiseInputs($_POST["task-id"]);
+    $subtask = sanitiseInputs($_POST["subtaskname"]);
+    createSubtask(OpenCon(), $taskId, $subtask);
+    CloseCon($conn);
+} elseif (isset($_POST["editSubtask"])) {
+
+    $taskId = $_POST["task-id"];
+    $updatedTitle = $_POST["task-title"];
+    updateSubtask(OpenCon(), $taskId, $updatedTitle);
+    CloseCon($conn);
+    exit();
+} elseif (isset($_POST["deleteSubtask"])) {
+    $taskId = $_POST["task-id"];
+    deleteSubtask(OpenCon(), $taskId);
     CloseCon($conn);
 } else {
     function getAllLabels()
@@ -56,6 +72,18 @@ if (isset($_POST["saveTask"])) {
                 $tasks[] = $row;
             }
             return $tasks;
+        }
+    }
+
+    function getSubtasksByTaskId($task_Id)
+    {
+        $query = "SELECT * FROM tbl_subtasks WHERE task_id=$task_Id";
+        $result = mysqli_query(OpenCon(), $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $subtasks[] = $row;
+            }
+            return $subtasks;
         }
     }
 };

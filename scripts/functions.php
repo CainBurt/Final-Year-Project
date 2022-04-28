@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+// print to console
+function debug_to_console($data)
+{
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
 //sanitise inputs
 function sanitiseInputs($input)
 {
@@ -13,7 +23,7 @@ function sanitiseInputs($input)
 
 
 //posts a task to the database
-function post($conn, $taskTitle, $taskLabelId)
+function createTask($conn, $taskTitle, $taskLabelId)
 {
     $project = $_SESSION["projectid"];
     $sql = "INSERT INTO tbl_tasks(title, label_id, project_id) VALUES ('$taskTitle', '$taskLabelId', '$project');";
@@ -55,9 +65,9 @@ function deleteTask($conn, $taskId)
 }
 
 //post project
-function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectEnd)
+function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectEnd, $creatorId)
 {
-    $sql = "INSERT INTO tbl_projects(project_name, project_description, project_start, project_end) VALUES ('$projectName', '$projectDesc', '$projectStart', '$projectEnd');";
+    $sql = "INSERT INTO tbl_projects(project_name, project_description, project_start, project_end, creator_id) VALUES ('$projectName', '$projectDesc', '$projectStart', '$projectEnd', '$creatorId');";
 
     if (mysqli_query($conn, $sql)) {
         header("location: ../projects.php?error=none&message=createprojectsuccess");
@@ -123,6 +133,10 @@ function emailExists($conn, $email)
 // create account
 function createUser($conn, $name, $surname, $email, $password)
 {
+    if (emailExists($conn, $email) !== false) {
+        header("location: ../?error=emailtaken");
+        exit();
+    }
     // hash password
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO tbl_users(user_name, user_surname, user_email, user_password) VALUES ('$name', '$surname', '$email', '$hash');";
@@ -158,6 +172,81 @@ function loginUser($conn, $email, $password)
         session_start();
         $_SESSION["user_id"] = $emailExists["id"];
         header("location: ../projects.php");
+        exit();
+    };
+}
+
+// add a user to a project
+function addUserToProject($conn, $project_id, $userData)
+{
+    $user_id = $userData["id"];
+
+    // TODO a check to make sure a user isnt already added.
+    $query = "INSERT INTO usersaddedtoprojects(user_id, project_id) VALUES ('$user_id', '$project_id');";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../projectsettings.php?error=none&message=useradded");
+        exit();
+    } else {
+        header("location: ../?error=couldnotadduser");
+        exit();
+    };
+}
+
+// remove user from a project
+function removeUserProject($conn, $userId, $projectId)
+{
+    $query = "DELETE FROM usersaddedtoprojects WHERE project_id='$projectId' AND user_id = '$userId';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../projectsettings.php?error=none&message=userremoved");
+        exit();
+    } else {
+        header("location: ../projectsettings.php?error=couldnotremoveuser");
+        exit();
+    };
+}
+
+// check project creator
+function checkIfAddedUser()
+{
+}
+
+// create subtask
+function createSubtask($conn, $taskId, $subtask)
+{
+    $query = "INSERT INTO tbl_subtasks(sub_name, sub_status, task_id) VALUES ('$subtask', 0 , '$taskId');";
+
+    if (mysqli_query($conn, $query)) {
+        header("location: ../tasks.php?error=none&message=createsubtasksuccess");
+        exit();
+    } else {
+        header("location: ../tasks.php?errorsubtasknotadded");
+        exit();
+    };
+}
+
+//edits subtask
+function updateSubtask($conn, $taskId, $updatedTitle)
+{
+    $query = "UPDATE tbl_subtasks SET sub_name='$updatedTitle' WHERE id='$taskId';";
+
+    if (mysqli_query($conn, $query)) {
+        header("location: ../tasks.php?error=none&message=editsuccess");
+        exit();
+    } else {
+        header("location: ../tasks.php.php?error=tasknotupdated");
+        exit();
+    };
+}
+
+//deletes subtask
+function deleteSubtask($conn, $taskId)
+{
+    $query = "DELETE FROM tbl_subtasks WHERE id='$taskId';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../tasks.php?error=none&message=deletesuccess");
+        exit();
+    } else {
+        header("location: ../tasks.php?error=tasknotdeleted");
         exit();
     };
 }

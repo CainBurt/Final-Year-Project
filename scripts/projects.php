@@ -1,15 +1,16 @@
 <?php
 require_once 'db_connection.php';
 require_once 'functions.php';
-
+// session_start();
 // save project to database
 if (isset($_POST["saveProject"])) {
     $projectName = sanitiseInputs($_POST["projectName"]);
     $projectDesc = sanitiseInputs($_POST["projectDesc"]);
     $projectStart = sanitiseInputs($_POST["projectStart"]);
     $projectEnd = sanitiseInputs($_POST["projectEnd"]);
+    $creatorId = $_SESSION['user_id'];
 
-    saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd);
+    saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd, $creatorId);
     CloseCon($conn);
     exit();
 } else if (isset($_POST["saveEditProject"])) {
@@ -30,16 +31,61 @@ if (isset($_POST["saveProject"])) {
     $_SESSION['projectid'] = $_GET["projectid"];
     $_SESSION['projectname'] = $_GET["projectname"];
     header("location: ../kanban.php?projectvarinsession");
+} else if (isset($_POST["addUserToProject"])) {
+    $email = sanitiseInputs($_POST["user-email"]);
+    $emailExists = emailExists(OpenCon(), $email);
+    $project_id = $_SESSION['projectid'];
+
+    if ($emailExists !== false) {
+        addUserToProject(OpenCon(), $project_id, $emailExists);
+        CloseCon($conn);
+    } else {
+        header("location: ../kanban.php?error=emaildoesntexist");
+        exit();
+    }
+} else if (isset($_POST["removeUser"])) {
+
+    $userId = $_POST["userId"];
+    $projectId = $_SESSION['projectid'];
+    removeUserProject(OpenCon(), $userId, $projectId);
+    CloseCon($conn);
 } else {
     function getAllProjects()
     {
-        $query = "SELECT * FROM tbl_projects";
+        $creatorId = $_SESSION['user_id'];
+        $query = "SELECT * FROM tbl_projects WHERE creator_id='$creatorId';";
         $result = mysqli_query(OpenCon(), $query);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $projects[] = $row;
             }
             return $projects;
+        }
+    }
+
+    function getAllUsersInProject()
+    {
+        $project_id = $_SESSION['projectid'];
+        $query = "SELECT * FROM tbl_users INNER JOIN usersaddedtoprojects ON usersaddedtoprojects.user_id = tbl_users.id WHERE project_id='$project_id';";
+        $result = mysqli_query(OpenCon(), $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $users[] = $row;
+            }
+            return $users;
+        }
+    }
+
+    function getAddedToProjects()
+    {
+        $user_id = $_SESSION['user_id'];
+        $query = "SELECT * FROM tbl_projects INNER JOIN usersaddedtoprojects ON usersaddedtoprojects.project_id = tbl_projects.id WHERE user_id='$user_id';";
+        $result = mysqli_query(OpenCon(), $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $users[] = $row;
+            }
+            return $users;
         }
     }
 }

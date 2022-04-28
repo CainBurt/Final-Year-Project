@@ -50,8 +50,41 @@ $(document).ready(function() {
         modal.find(".modal-body input.project-end").val(end);
     });
 
+    // shows add user modal on click
+    $("#addUserModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var email = button.data("useremail");
+        var modal = $(this);
+        modal.find(".modal-title").text("Add User");
+    });
 
+    //shows the data in the remove user modal
+    $("#removeUserModal").on("show.bs.modal", function(event) {
+        console.log("CLICK");
+        var button = $(event.relatedTarget);
+        var userId = button.data("user");
+        var modal = $(this);
+        modal.find(".modal-body input.userId").val(userId);
+    });
 
+    //shows the add sub task modal and puts data into the inputs
+    $("#addSubtaskModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var taskId = button.data("task");
+        var modal = $(this);
+        modal.find(".modal-body input.task-id").val(taskId);
+    });
+
+    //shows the edit subtask modal and puts data into the inputs
+    $("#editSubtask").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var taskId = button.data("task");
+        var title = button.data("title");
+        var modal = $(this);
+        modal.find(".modal-title").text("Edit Subtask");
+        modal.find(".modal-body input.task-id").val(taskId);
+        modal.find(".modal-body input.task-title").val(title);
+    });
 
 });
 
@@ -77,10 +110,9 @@ $(function() {
 $(document).on('click', '#showEdit', function() {
     var taskid = $('#showEdit').parent().parent().attr("data-task-id");
     var task = $('#showEdit').parent().text();
-    console.log(taskid, task);
 })
 
-// Collapse click
+// Sidebar Collapse click
 $(document).on('click', '[data-toggle=collapse]', function() {
     SidebarCollapse();
 })
@@ -89,8 +121,27 @@ function SidebarCollapse() {
     $('.menu-collapsed').toggleClass('d-none');
     $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
     $('#projectName').toggleClass('acronym acronym-collapsed');
+}
+
+// Task Expand and collapse toggle on click
+$(document).on('click', '[data-toggle=taskExpand]', function(e) {
+    var taskid = $(this).data("task-id");
+    var subtaskTaskId = $(this).next().data('subtask-task-id')
+    if ($(e.target).is('div>ul>li>a')) {
+        e.preventDefault();
+        return;
+    }
+    TaskExpand(taskid, subtaskTaskId);
+})
+
+function TaskExpand(taskid, subtaskTaskId) {
+    if (taskid == subtaskTaskId) {
+        $('[id="subtaskid' + String(subtaskTaskId) + '"]').toggleClass('d-none');
+        $('[id="arrowid' + String(taskid) + '"]').toggleClass('fa-chevron-down fa-chevron-up');
+    }
 
 }
+
 
 //login and register forms
 $(function() {

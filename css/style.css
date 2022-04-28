@@ -1,151 +1,187 @@
-.projectClickable,
-.projectClickable:hover,
-button {
-    all: unset;
-}
-
-body {
-    background-color: rgb(230, 230, 230);
-}
-
-.white {
-    color: white;
-}
-
-.red {
-    background-color: #B20D30;
-}
-
-
-/**** Kanban Syling ****/
-
-ul.sortable {
-    padding-left: 0;
-    list-style: none;
-    padding-top: 10px;
-}
-
-.ui-sortable-placeholder {
-    visibility: inherit !important;
-    background: rgb(214, 214, 214);
-}
-
-.ui-sortable-handle:hover {
-    cursor: pointer;
-    filter: brightness(95%);
-}
-
-#showEdit {
-    display: none;
-}
-
-#taskCard:hover>#showEdit {
-    display: block;
-}
-
-
-/**** sidebar styling ****/
-
-#body-row {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-#sidebar-container {
-    min-height: 100vh;
-    padding: 0;
-}
-
-
-/* Sidebar sizes when expanded and expanded */
-
-.sidebar-expanded {
-    width: 230px;
-}
-
-.sidebar-collapsed {
-    width: 60px;
-}
-
-
-/* hide project acryonm on expand */
-
-.acronym {
-    display: none;
-}
-
-
-/* Menu item*/
-
-#sidebar-container .list-group a {
-    height: 50px;
-    color: black;
-}
-
-
-/***** project border ****/
-
-.new-project {
-    border: 4px dashed lightgray;
-    transition: transform 0.5s;
-    border-radius: 1em;
-}
-
-.project-card {
-    transition: transform 0.5s;
-    border-radius: 1em;
-}
-
-.new-project:hover,
-.project-card:hover {
-    cursor: pointer;
-    background-color: rgb(238, 238, 238);
-    transform: scale(0.95);
-    transition: transform 0.5s;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
-}
-
-.project-body {
-    height: 20rem;
-}
-
-.card-footer {
-    height: 3rem;
-    overflow: hidden;
-}
-
-.footer-content {
-    display: none;
-}
-
-.project-card:hover>.card-footer>.footer-content {
-    display: block;
-}
-
-.new-project .project-body {
-    height: 23rem;
-}
-
-#deleteProject:hover {
-    cursor: pointer;
-    color: gray;
-}
-
-.btn-block+.btn-block {
-    margin-top: .5rem;
-}
-
-
-/* login and register */
-
-.nav-link {
-    color: #B20D30;
-}
-
-.nav-link:hover {
-    color: red;
-}
-
-.nav-pills>li>a.active {
-    background-color: #B20D30 !important;
-}
+    .projectClickable,
+    .projectClickable:hover,
+    button {
+        all: unset;
+    }
+    
+    body {
+        background-color: rgb(230, 230, 230);
+    }
+    
+    .white {
+        color: white;
+    }
+    
+    .red {
+        background-color: #B20D30;
+    }
+    
+    .card-body {
+        overflow: visible;
+    }
+    /**** Kanban Syling ****/
+    
+    ul.sortable {
+        padding-left: 0;
+        list-style: none;
+        padding-top: 10px;
+    }
+    
+    .ui-sortable-placeholder {
+        visibility: inherit !important;
+        background: rgb(214, 214, 214);
+    }
+    
+    .ui-sortable-handle:hover {
+        cursor: pointer;
+        filter: brightness(95%);
+    }
+    
+    #showEdit {
+        display: none;
+    }
+    
+    #taskCard:hover>#showEdit {
+        display: block;
+    }
+    /**** sidebar styling ****/
+    
+    #body-row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    #sidebar-container {
+        min-height: 100vh;
+        padding: 0;
+    }
+    /* Sidebar sizes when expanded and expanded */
+    
+    .sidebar-expanded {
+        width: 230px;
+    }
+    
+    .sidebar-collapsed {
+        width: 60px;
+    }
+    /* hide project acryonm on expand */
+    
+    .acronym {
+        display: none;
+    }
+    /* Menu item*/
+    
+    #sidebar-container .list-group a {
+        height: 50px;
+        color: black;
+    }
+    
+    #adduser_sidebar_button {
+        position: absolute;
+        display: inline-block;
+        bottom: 0;
+        left: 15px;
+        width: 100%;
+    }
+    /***** project border ****/
+    
+    .new-project {
+        border: 4px dashed lightgray;
+        transition: transform 0.5s;
+        border-radius: 1em;
+    }
+    
+    .project-card {
+        transition: transform 0.5s;
+        border-radius: 1em;
+    }
+    
+    .new-project:hover,
+    .project-card:hover {
+        cursor: pointer;
+        background-color: rgb(238, 238, 238);
+        transform: scale(0.95);
+        transition: transform 0.5s;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+    }
+    
+    .project-body {
+        height: 20rem;
+    }
+    
+    .card-footer {
+        height: 3rem;
+        overflow: hidden;
+    }
+    
+    .footer-content {
+        display: none;
+    }
+    
+    .project-card:hover>.card-footer>.footer-content {
+        display: block;
+    }
+    
+    .new-project .project-body {
+        height: 23rem;
+    }
+    
+    #deleteProject:hover {
+        cursor: pointer;
+        color: gray;
+    }
+    
+    .btn-block+.btn-block {
+        margin-top: .5rem;
+    }
+    /* login and register */
+    
+    .nav-link {
+        color: #B20D30;
+    }
+    
+    .nav-link:hover {
+        color: red;
+    }
+    
+    .nav-pills>li>a.active {
+        background-color: #B20D30 !important;
+    }
+    /* added users styling */
+    
+    #showDelUser {
+        display: none;
+    }
+    
+    #userCard:hover>#showDelUser {
+        display: block;
+        cursor: pointer;
+    }
+    /* tasks */
+    
+    .circle-around {
+        background: #B20D30;
+        text-transform: uppercase;
+        align-items: center;
+        color: rgba(233, 236, 237, 0.78);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: inline-flex;
+        font-size: 16px;
+        padding: 5px;
+        vertical-align: middle;
+        margin: 0 10px 0 0;
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+    }
+    
+    .dropdown-item {
+        overflow: visible;
+    }
+    
+    .task-page-card:hover {
+        cursor: pointer;
+    }

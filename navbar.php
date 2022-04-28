@@ -1,4 +1,5 @@
 <?php include_once 'scripts/tasks.php'; ?>
+<?php include_once 'scripts/projects.php'; ?>
 <!doctype html>
 <html lang="en">
 
@@ -24,6 +25,35 @@
 
 <body>
 
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Add User</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </div>
+                <form action="scripts/projects.php" method="post">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="list-name" class="col-form-label">User Email:</label>
+                            <input type="text" class="form-control user-email" id="user-email" name="user-email">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success" name="addUserToProject">Add User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- top navbar -->
     <header class="navbar navbar-dark sticky-top red flex-md-nowrap p-0 shadow">
         <a id="toggleSidebar" class="pl-3" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars white"></i>
@@ -31,8 +61,8 @@
         <a class="navbar-brand col me-0 px-3" href="/fyp/projects.php"><strong>All Projects</strong></a>
 
         <div class="text-secondary nav-item">
-            <a href="#"><i class="px-3 fa-solid fa-gear white"></i></a>
-            <a href="#"><i class="px-3 fa-solid fa-user white"></i></a>
+            <a href="/fyp/projectsettings.php"><i class="px-3 fa-solid fa-gear white"></i></a>
+            <a href="/fyp/profile.php"><i class="px-3 fa-solid fa-user white"></i></a>
             <a href="/fyp/scripts/logout.php"><i class="px-3 fa-solid fa-arrow-right-from-bracket white"></i></a>
         </div>
 
@@ -66,9 +96,9 @@
         </style>
     <?php } ?>
 
-
+    <!-- sidebar -->
     <div class="row" id="body-row">
-        <nav id="sidebar-container" class="sidebar-expanded d-none d-md-block bg-light">
+        <nav id="sidebar-container" class="sidebar-expanded d-none d-md-block bg-light ">
 
             <ul class="list-group">
                 <li class="nav-item">
@@ -90,7 +120,16 @@
                         <span class="menu-collapsed">Tasks</span>
                     </div>
                 </a>
+
             </ul>
+            <div class="d-flex p-2 align-items-end">
+                <button type="submit" class="btn btn-success flex-grow-1" data-toggle="modal" data-target="#addUserModal" name="Add User">
+                    <span class="fa-solid fa-plus"></span>
+                    <span class="menu-collapsed">Add User</span>
+                </button>
+            </div>
+
+
 
         </nav>
         <?php

@@ -133,7 +133,7 @@ include_once 'scripts/projects.php';
     </div>
 
 
-
+    <!-- PROJECTS YOU HAVE CREATED -->
     <?php
     $projects = getAllProjects();
     foreach ($projects as $project) {
@@ -167,7 +167,32 @@ include_once 'scripts/projects.php';
         </div>
 
     <?php } ?>
+    <!-- PROJECTS YOU HAVE BEEN ADDED TO -->
 
+    <?php
+    $addedProjects = getAddedToProjects();
+    foreach ($addedProjects as $addedProject) {
+    ?>
+        <!-- exisiting projects cards -->
+        <div class="col-sm-3 mt-4">
+            <div class="project-card card shadow">
+                <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $addedProject["id"] ?>&projectname=<?php echo $addedProject["project_name"] ?>">
+
+                    <div class="project-body card-body d-flex justify-content-center align-items-center">
+                        <p class="card-text">
+                        <h2 class="text-center"><?php echo $addedProject["project_name"] ?></h2>
+                        </p>
+
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <i class="px-1 fa-solid fa-user black fa-lg"></i>
+                    </div>
+
+                </a>
+
+            </div>
+        </div>
+    <?php } ?>
 </div>
 
 <?php include_once 'footer.php' ?>

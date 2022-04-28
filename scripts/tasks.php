@@ -7,14 +7,18 @@ if (isset($_POST["saveTask"])) {
 
     $taskTitle = $_POST["task"];
     $taskLabelId = $_POST["list"];
-    createTask(OpenCon(), $taskTitle, $taskLabelId);
+    $startDate = $_POST["start"];
+    $endDate = $_POST["end"];
+    createTask(OpenCon(), $taskTitle, $taskLabelId, $startDate, $endDate);
     CloseCon($conn);
     exit();
 } elseif (isset($_POST["editTask"])) {
 
     $taskId = $_POST["task-id"];
     $updatedTitle = $_POST["task-title"];
-    updateTask(OpenCon(), $taskId, $updatedTitle);
+    $startDate = $_POST["task-start"];
+    $endDate = $_POST["task-end"];
+    updateTask(OpenCon(), $taskId, $updatedTitle, $startDate, $endDate);
     CloseCon($conn);
     exit();
 } elseif (isset($_POST["deleteTask"])) {

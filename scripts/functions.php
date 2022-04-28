@@ -23,10 +23,10 @@ function sanitiseInputs($input)
 
 
 //posts a task to the database
-function createTask($conn, $taskTitle, $taskLabelId)
+function createTask($conn, $taskTitle, $taskLabelId, $start, $end)
 {
     $project = $_SESSION["projectid"];
-    $sql = "INSERT INTO tbl_tasks(title, label_id, project_id) VALUES ('$taskTitle', '$taskLabelId', '$project');";
+    $sql = "INSERT INTO tbl_tasks(title, label_id, task_start, task_end, project_id) VALUES ('$taskTitle', '$taskLabelId', '$start', '$end', '$project');";
 
     if (mysqli_query($conn, $sql)) {
         header("location: ../kanban.php?error=none&message=createsuccess");
@@ -38,9 +38,9 @@ function createTask($conn, $taskTitle, $taskLabelId)
 };
 
 //edits a task in the database
-function updateTask($conn, $taskId, $updatedTitle)
+function updateTask($conn, $taskId, $updatedTitle, $start, $end)
 {
-    $query = "UPDATE tbl_tasks SET title='$updatedTitle' WHERE id='$taskId';";
+    $query = "UPDATE tbl_tasks SET title='$updatedTitle', task_start='$start', task_end='$end' WHERE id='$taskId';";
 
     if (mysqli_query($conn, $query)) {
         header("location: ../kanban.php?error=none&message=editsuccess");

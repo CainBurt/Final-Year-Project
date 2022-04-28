@@ -18,10 +18,14 @@ $(document).ready(function() {
         var button = $(event.relatedTarget);
         var taskId = button.data("task");
         var title = button.data("title");
+        var start = button.data("start");
+        var end = button.data("end");
         var modal = $(this);
         modal.find(".modal-title").text("Edit Task");
         modal.find(".modal-body input.task-id").val(taskId);
         modal.find(".modal-body input.task-title").val(title);
+        modal.find(".modal-body input.project-start").val(start);
+        modal.find(".modal-body input.project-end").val(end);
     });
 
     //shows the data in the delete project modal

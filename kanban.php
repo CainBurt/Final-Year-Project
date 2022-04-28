@@ -8,7 +8,7 @@ include_once 'scripts/tasks.php';
     <h1 class="h2">Kanban Board</h1>
 </div>
 
-<!-- Task Modal Popup-->
+<!-- Create Task Modal Popup-->
 <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -28,7 +28,18 @@ include_once 'scripts/tasks.php';
                         <label>Task Name:</label>
                         <input type="text" class="form-control" id="task" name="task" placeholder="Task Title">
                     </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Start Date:</label>
+                            <input type="date" class="form-control" id="start" name="start" value="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
 
+                        <div class="col">
+                            <label>End Date:</label>
+                            <input type="date" class="form-control" id="end" name="end" value="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -58,6 +69,19 @@ include_once 'scripts/tasks.php';
                     <div class="form-group">
                         <label>Task Name:</label>
                         <input type="text" class="form-control task-title" id="task-title" name="task-title" placeholder="Task Title">
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Start Date:</label>
+                            <input type="date" class="form-control project-start" id="task-start" name="task-start" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+
+                        <div class="col">
+                            <label>End Date:</label>
+                            <input type="date" class="form-control project-end" id="task-end" name="task-end" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+
                     </div>
 
                 </div>
@@ -95,7 +119,7 @@ include_once 'scripts/tasks.php';
                         ?>
                                 <li class="ui-sortable-handle card mt-1" data-task-id="<?php echo $taskRow["id"]; ?>">
                                     <div class="card-body" id="taskCard"><?php echo $taskRow["title"] ?>
-                                        <a class="bi bi-pencil-square float-right" id="showEdit" data-toggle="modal" data-target="#editModal" data-task="<?php echo $taskRow["id"]; ?>" data-title="<?php echo $taskRow["title"] ?>"></a>
+                                        <a class="bi bi-pencil-square float-right" id="showEdit" data-toggle="modal" data-target="#editModal" data-task="<?php echo $taskRow["id"]; ?>" data-title="<?php echo $taskRow["title"]; ?>" data-start="<?php echo $taskRow["task_start"]; ?>" data-end="<?php echo $taskRow["task_end"] ?>"> </a>
                                     </div>
                                 </li>
                         <?php

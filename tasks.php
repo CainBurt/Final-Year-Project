@@ -178,7 +178,7 @@ include_once 'navbar.php';
                             foreach ($usersInProject as $user) {
                                 if ($taskRow["assigned_user_id"] == $user["id"]) {
                             ?>
-                                    <div class="circle-around"><?php echo $user["user_name"][0] . $user["user_surname"][0] ?></div>
+                                    <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $user["user_name"] . $user["user_surname"] ?>"><?php echo $user["user_name"][0] . $user["user_surname"][0] ?></div>
                             <?php
                                 }
                             };
@@ -203,7 +203,7 @@ include_once 'navbar.php';
                                 <div class="card-body subtask " id="taskCard">
                                     <div class="form-check form-check-inline">
                                         <form action="" method="post">
-                                            <input class="form-check-input" type="checkbox" <?php if ($subtaskrow["sub_status"] == 0) echo 'checked="checked"'; ?>>
+                                            <input id="subtask_status" class="form-check-input" type="checkbox" data-subtask-id="<?php echo $subtaskrow["task_id"]; ?>" <?php if ($subtaskrow["sub_status"] == 1) echo 'checked="checked"'; ?>>
                                             <label class="form-check-label"> <?php echo $subtaskrow["sub_name"]; ?></label>
                                         </form>
                                     </div>

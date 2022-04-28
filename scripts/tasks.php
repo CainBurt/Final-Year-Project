@@ -97,4 +97,17 @@ if (isset($_POST["saveTask"])) {
             return $subtasks;
         }
     }
+
+    function editSubtaskStatus($status, $subtask_Id)
+    {
+        $query = "UPDATE tbl_subtasks SET sub_status='$status' WHERE id='$subtask_Id';";
+        $result = mysqli_query(OpenCon(), $query);
+        debug_to_console($result);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $tasks[] = $row;
+            }
+            return $tasks;
+        }
+    }
 };

@@ -133,6 +133,23 @@ $(function() {
         .disableSelection();
 });
 
+//Dynamically changes status of subtask on click
+$(document).on('click', '#subtask_status', function() {
+    var url = "../fyp/scripts/editTaskStatus.php";
+
+    console.log("CHECKBOX CLICKED");
+    console.log($(this).data("subtask-id"));
+    console.log($(this).is(":checked") ? 1 : 0);
+    var status = $(this).is(":checked") ? 1 : 0;
+    var subtask = $(this).data("subtask-id");
+
+    $.ajax({
+        url: url + "?status=" + status + "&subtask_id=" + subtask,
+        success: function() {
+            alert("changed subtask statys");
+        }
+    });
+});
 //gets the id of task on click
 $(document).on('click', '#showEdit', function() {
     var taskid = $('#showEdit').parent().parent().attr("data-task-id");
@@ -190,3 +207,7 @@ $(function() {
     });
 
 });
+
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+})

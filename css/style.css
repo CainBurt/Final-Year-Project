@@ -194,20 +194,18 @@
         background-color: rgba(182, 182, 182, 0.452);
     }
     /* calendar styling */
-    
-    body {
+    /* body {
         margin-top: 50px;
         text-align: center;
         font-size: 12px;
         font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-    }
+    } */
     
     #calendar {
-        width: 700px;
+        /* background-color: rgba(223, 223, 223, 0.801); */
         margin: 0 auto;
     }
-    
-    .response {
+    /* .response {
         height: 60px;
     }
     
@@ -216,4 +214,4 @@
         padding: 10px 60px;
         border: #c3e6c3 1px solid;
         display: inline-block;
-    }
+    } */

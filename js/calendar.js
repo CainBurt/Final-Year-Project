@@ -2,7 +2,7 @@
 $(document).ready(function() {
     var calendar = $('#calendar').fullCalendar({
         editable: true,
-        events: "fetch-event.php",
+        events: "../fyp/scripts/getTasksForCal.php",
         displayEventTime: false,
         eventRender: function(event, element, view) {
             if (event.allDay === 'true') {

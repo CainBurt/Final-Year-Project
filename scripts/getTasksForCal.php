@@ -2,8 +2,9 @@
 require_once 'db_connection.php';
 require_once 'functions.php';
 
+$projectId = $_SESSION["projectid"];
 $data = array();
-$query = "SELECT * FROM tbl_tasks ORDER BY id";
+$query = "SELECT * FROM tbl_tasks WHERE project_id = '$projectId' ORDER BY id";
 
 $result = mysqli_query(OpenCon(), $query);
 

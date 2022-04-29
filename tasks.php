@@ -2,7 +2,8 @@
 include_once 'navbar.php';
 ?>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Tasks</h1>
+    <h1 class="h2">Tasks and Subtasks</h1>
+    <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#projectModal"><span class="bi bi-plus white">New Task</span></button>
 </div>
 
 <!-- Add or Change user modal -->
@@ -165,64 +166,76 @@ include_once 'navbar.php';
 
         ?>
                 <div class="row-6">
+
                     <div class="task-page-card card mt-1" data-toggle="taskExpand" data-task-id="<?php echo $taskRow["id"]; ?>">
+                        <?php
+                        // changes task card colour if the task is marked as done
+                        if ($taskRow["label_id"] == 3) {
 
-                        <div class="card-body taskPage" id="taskCard"><?php echo $taskRow["title"] ?>
-                            <!-- shows down arrow only if there are subtasks -->
-                            <?php if (isset($subtasks)) { ?>
-                                <a id="arrowid<?php echo $taskRow["id"]; ?>" class="fa-solid fa-chevron-down float-right"></a>
-                            <?php } ?>
-
-
+                        ?>
+                            <div class="card-body doneTask" id="taskCard"><?php echo $taskRow["title"] ?>
                             <?php
-                            foreach ($usersInProject as $user) {
-                                if ($taskRow["assigned_user_id"] == $user["id"]) {
+                        } else {
                             ?>
-                                    <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $user["user_name"] . $user["user_surname"] ?>"><?php echo $user["user_name"][0] . $user["user_surname"][0] ?></div>
-                            <?php
-                                }
-                            };
-                            ?>
+                                <div class="card-body taskPage" id="taskCard"><?php echo $taskRow["title"] ?>
+                                <?php
+                            }
+                                ?>
+                                <!-- shows down arrow only if there are subtasks -->
+                                <?php if (isset($subtasks)) { ?>
+                                    <a id="arrowid<?php echo $taskRow["id"]; ?>" class="fa-solid fa-chevron-down float-right"></a>
+                                <?php } ?>
 
-                            <i class="fa-solid fa-ellipsis-vertical float-right pr-3" role="button" id="showEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#changeUser" data-task="<?php echo $taskRow["id"]; ?>">Add or Change User</a></li>
-                                <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#addSubtaskModal" data-task="<?php echo $taskRow["id"]; ?>">Add Subtask</a></li>
-                                <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#editTaskModal" data-task="<?php echo $taskRow["id"]; ?>" data-title=" <?php echo $taskRow["title"]; ?>" data-start="<?php echo $taskRow["task_start"]; ?>" data-end="<?php echo $taskRow["task_end"] ?>">Edit Task</a></li>
-                            </ul>
 
-                        </div>
-                    </div>
+                                <?php
+                                foreach ($usersInProject as $user) {
+                                    if ($taskRow["assigned_user_id"] == $user["id"]) {
+                                ?>
+                                        <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $user["user_name"]  . " " . $user["user_surname"] ?>"><?php echo $user["user_name"][0] . $user["user_surname"][0] ?></div>
+                                <?php
+                                    }
+                                };
+                                ?>
 
-                    <?php
-                    if (!empty($subtasks)) {
-                        foreach ($subtasks as $subtaskrow) {
-
-                    ?>
-                            <div id="subtaskid<?php echo $subtaskrow["task_id"]; ?>" class="ui-sortable-handle card mt-1 ml-5 mr-5 d-none" data-subtask-task-id=<?php echo $subtaskrow["task_id"]; ?>>
-                                <div class="card-body subtask " id="taskCard">
-                                    <div class="form-check form-check-inline">
-                                        <form action="" method="post">
-                                            <input id="subtask_status" class="form-check-input" type="checkbox" data-subtask-id="<?php echo $subtaskrow["task_id"]; ?>" <?php if ($subtaskrow["sub_status"] == 1) echo 'checked="checked"'; ?>>
-                                            <label class="form-check-label"> <?php echo $subtaskrow["sub_name"]; ?></label>
-                                        </form>
-                                    </div>
-                                    <i class="bi bi-pencil-square float-right" role="button" id="showEdit" data-toggle="modal" data-target="#editSubtask" data-task="<?php echo $subtaskrow["id"]; ?>" data-title="<?php echo $subtaskrow["sub_name"] ?>"></i>
+                                <i class="fa-solid fa-ellipsis-vertical float-right pr-3" role="button" id="showEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#changeUser" data-task="<?php echo $taskRow["id"]; ?>">Add or Change User</a></li>
+                                    <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#addSubtaskModal" data-task="<?php echo $taskRow["id"]; ?>">Add Subtask</a></li>
+                                    <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#editTaskModal" data-task="<?php echo $taskRow["id"]; ?>" data-title=" <?php echo $taskRow["title"]; ?>" data-start="<?php echo $taskRow["task_start"]; ?>" data-end="<?php echo $taskRow["task_end"] ?>">Edit Task</a></li>
+                                </ul>
 
                                 </div>
                             </div>
-                    <?php
-                        }
-                    }
-                    ?>
-                </div>
-        <?php
+
+                            <?php
+                            if (!empty($subtasks)) {
+                                foreach ($subtasks as $subtaskrow) {
+
+                            ?>
+                                    <div id="subtaskid<?php echo $subtaskrow["task_id"]; ?>" class="ui-sortable-handle card mt-1 ml-5 mr-5 d-none" data-subtask-task-id=<?php echo $subtaskrow["task_id"]; ?>>
+                                        <div class="card-body subtask " id="taskCard">
+                                            <div class="form-check form-check-inline">
+                                                <form action="" method="post">
+                                                    <input id="subtask_status" class="form-check-input" type="checkbox" data-subtask-id="<?php echo $subtaskrow["id"]; ?>" <?php if ($subtaskrow["sub_status"] == 1) echo 'checked="checked"'; ?>>
+                                                    <label class="form-check-label"> <?php echo $subtaskrow["sub_name"]; ?></label>
+                                                </form>
+                                            </div>
+                                            <i class="bi bi-pencil-square float-right" role="button" id="showEdit" data-toggle="modal" data-target="#editSubtask" data-task="<?php echo $subtaskrow["id"]; ?>" data-title="<?php echo $subtaskrow["sub_name"] ?>"></i>
+
+                                        </div>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
+                    </div>
+            <?php
             }
         }
-        ?>
+            ?>
 
 
-    <?php
+        <?php
     }
-    ?>
-    <?php include_once 'footer.php' ?>
+        ?>
+        <?php include_once 'footer.php' ?>

@@ -20,6 +20,10 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/form.js"></script>
 
+    <link rel="stylesheet" href="fullcalendar/fullcalendar.min.css" />
+    <script src="fullcalendar/lib/jquery.min.js"></script>
+    <script src="fullcalendar/lib/moment.min.js"></script>
+    <script src="fullcalendar/fullcalendar.min.js"></script>
 
 </head>
 
@@ -118,6 +122,13 @@
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-tasks fa-fw mr-3"></span>
                         <span class="menu-collapsed">Tasks</span>
+                    </div>
+                </a>
+
+                <a href="/fyp/calendar.php" class="list-group-item list-group-item-action bg-light border-0">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-calendar fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Calendar</span>
                     </div>
                 </a>
 

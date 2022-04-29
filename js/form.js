@@ -146,7 +146,7 @@ $(document).on('click', '#subtask_status', function() {
     $.ajax({
         url: url + "?status=" + status + "&subtask_id=" + subtask,
         success: function() {
-            alert("changed subtask statys");
+            // alert("changed subtask statys");
         }
     });
 });

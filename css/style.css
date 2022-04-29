@@ -187,5 +187,33 @@
     }
     
     .subtask {
-        background-color: #d1d1d1;
+        background-color: #fd9f9f67;
+    }
+    
+    .doneTask {
+        background-color: rgba(182, 182, 182, 0.452);
+    }
+    /* calendar styling */
+    
+    body {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 12px;
+        font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+    }
+    
+    #calendar {
+        width: 700px;
+        margin: 0 auto;
+    }
+    
+    .response {
+        height: 60px;
+    }
+    
+    .success {
+        background: #cdf3cd;
+        padding: 10px 60px;
+        border: #c3e6c3 1px solid;
+        display: inline-block;
     }

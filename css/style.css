@@ -46,6 +46,10 @@
     }
     /**** sidebar styling ****/
     
+    .sticky-offset {
+        top: 40px;
+    }
+    
     #body-row {
         margin-left: 0;
         margin-right: 0;
@@ -119,29 +123,24 @@
     }
     
     .project-card:hover>.card-footer>.footer-content {
-        display: block;
+        display: inline;
     }
     
     .new-project .project-body {
         height: 23rem;
     }
     
-    #deleteProject:hover {
+    #deleteProject:hover,
+    #editProject:hover,
+    #leaveProject:hover,
+    .nav-link:hover,
+    .icon-hover:hover {
         cursor: pointer;
         color: gray;
     }
     
     .btn-block+.btn-block {
         margin-top: .5rem;
-    }
-    /* login and register */
-    
-    .nav-link {
-        color: #B20D30;
-    }
-    
-    .nav-link:hover {
-        color: red;
     }
     
     .nav-pills>li>a.active {
@@ -194,7 +193,8 @@
         background-color: rgba(182, 182, 182, 0.452);
     }
     /* calendar styling */
-    /* body {
+    /*     
+    body {
         margin-top: 50px;
         text-align: center;
         font-size: 12px;

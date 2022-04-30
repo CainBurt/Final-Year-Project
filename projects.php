@@ -116,13 +116,13 @@ include_once 'scripts/projects.php';
     </div>
 </div>
 
-<!-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#projectModal"><span class="bi bi-plus white">New Project</span></button>
-</div> -->
+</div>
 
 <div class="row">
     <!-- New project card -->
-    <div class="col-sm-3 mt-4">
+    <!-- <div class="col-sm-3 mt-4">
         <div class="new-project card shadow " data-toggle="modal" data-target="#projectModal">
             <div class="project-body card-body d-flex justify-content-center align-items-center">
                 <p class="card-text">
@@ -130,7 +130,7 @@ include_once 'scripts/projects.php';
                 </p>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- PROJECTS YOU HAVE CREATED -->
@@ -156,7 +156,7 @@ include_once 'scripts/projects.php';
                     </div>
                     <div class="card-footer bg-transparent border-top-0">
                         <div class="footer-content">
-                            <a class="bi bi-trash float-left" id="deleteProject" data-toggle="modal" data-target="#deleteModal" data-project="<?php echo $projectId ?>"></a>
+                            <a class="bi bi-trash float-left project-item" id="deleteProject" data-toggle="modal" data-target="#deleteModal" data-project="<?php echo $projectId ?>"></a>
                             <a class="bi bi-pencil-square float-right" id="editProject" data-toggle="modal" data-target="#editProjectModal" data-id="<?php echo $projectId ?>" data-title="<?php echo $projectName ?>" data-desc="<?php echo $projectDesc ?>" data-start="<?php echo $projectStart ?>" data-end="<?php echo $projectEnd ?>"></a>
                         </div>
                     </div>
@@ -186,6 +186,9 @@ include_once 'scripts/projects.php';
                     </div>
                     <div class="card-footer bg-transparent border-top-0">
                         <i class="px-1 fa-solid fa-user black fa-lg"></i>
+                        <div class="footer-content">
+                            <a class="px-1 fa-solid fa-arrow-right-from-bracket float-right" id="leaveProject"></a>
+                        </div>
                     </div>
 
                 </a>

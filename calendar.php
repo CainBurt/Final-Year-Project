@@ -19,6 +19,7 @@ include_once 'navbar.php';
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Calendar</h1>
+    <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#projectModal"><span class="bi bi-plus white">New Task</span></button>
 </div>
 <div class="response"></div>
 <div class="container">
@@ -79,7 +80,29 @@ include_once 'navbar.php';
                         alert("Update completed")
                     }
                 })
-            }
+            },
+            // tooltip on task hover
+            eventMouseover: function(calEvent, jsEvent) {
+                if (calEvent.user == "null" || calEvent.user == " ") {
+                    calEvent.user = "<i>No One</i>";
+                }
+                var tooltip = '<div class="tooltipevent" style="width:250px;height:20px;background:#ccc;position:absolute;z-index:10001;">' + "Assigned User Is: " + calEvent.user + '</div>';
+                var $tooltip = $(tooltip).appendTo('body');
+
+                $(this).mouseover(function(e) {
+                    $(this).css('z-index', 10000);
+                    $tooltip.fadeIn('500');
+                    $tooltip.fadeTo('10', 1.9);
+                }).mousemove(function(e) {
+                    $tooltip.css('top', e.pageY + 10);
+                    $tooltip.css('left', e.pageX + 20);
+                });
+            },
+
+            eventMouseout: function(calEvent, jsEvent) {
+                $(this).css('z-index', 8);
+                $('.tooltipevent').remove();
+            },
         })
     })
 </script>

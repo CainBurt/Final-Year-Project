@@ -49,6 +49,12 @@ if (isset($_POST["saveProject"])) {
     $projectId = $_SESSION['projectid'];
     removeUserProject(OpenCon(), $userId, $projectId);
     CloseCon($conn);
+} else if (isset($_POST["removeUserFromProject"])) {
+
+    $userId = $_SESSION["user_id"];
+    $projectId = $_POST['delUserFromProjectId'];
+    leaveProject(OpenCon(), $userId, $projectId);
+    CloseCon($conn);
 } else {
     function getAllProjects()
     {
@@ -86,6 +92,26 @@ if (isset($_POST["saveProject"])) {
                 $users[] = $row;
             }
             return $users;
+        }
+    }
+
+    function userCreatedCurrentProject()
+    {
+
+        // get current project
+        $project_id = $_SESSION['projectid'];
+        // get current user
+        $user_id = $_SESSION['user_id'];
+        // check if curent user created current project
+        $query = "SELECT * FROM tbl_projects WHERE id='$project_id' AND creator_id='$user_id';";
+        $result = mysqli_query(OpenCon(), $query);
+
+        if (mysqli_num_rows($result) !== 0) {
+            // echo "User Did Not create project"
+            return TRUE;
+        } else {
+            return FALSE;
+            // echo "User Created Project";
         }
     }
 }

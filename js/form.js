@@ -38,6 +38,16 @@ $(document).ready(function() {
 
     });
 
+    //shows the data in the leave project
+    $("#leaveProjectModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var projectId = button.data("id");
+        console.log(projectId);
+        var modal = $(this);
+        modal.find(".modal-body input.project").val(projectId);
+
+    });
+
     //shows the edit project modal and puts data into the inputs
     $("#editProjectModal").on("show.bs.modal", function(event) {
         var button = $(event.relatedTarget);
@@ -113,6 +123,8 @@ $(document).ready(function() {
         modal.find(".modal-title").text("Change User on Task");
         modal.find(".modal-body input.task-id").val(taskId);
     });
+
+
 });
 
 //allows tasks to be moved between labels

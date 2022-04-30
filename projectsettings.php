@@ -4,7 +4,7 @@ include_once 'scripts/projects.php';
 ?>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Added Users</h1>
+    <h1 class="h2">Users in Project</h1>
 </div>
 
 <!-- delete user from project modal -->
@@ -31,38 +31,45 @@ include_once 'scripts/projects.php';
     </div>
 </div>
 
+<?php if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) { ?>
+    <div class="success-message" style="margin-bottom: 20px;font-size: 20px;color: green;"><?php echo $_SESSION['success_message']; ?></div>
+<?php unset($_SESSION['success_message']);
+} ?>
 
+<div class="row">
+    <?php
+    $users = getAllUsersInProject();
+    if ($users !== NULL) {
+        foreach ($users as $user) {
+            // debug_to_console($user);
+    ?>
 
+            <!-- exisiting projects cards -->
+            <div class="col-lg-2 mt-4">
+                <div class="user-card card shadow" id="addedUser">
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <div class="circle-around-settings"><?php echo $user["user_name"][0] . $user["user_surname"][0] ?></div>
 
-
-
-<?php
-$users = getAllUsersInProject();
-// TODO IF EMPTY ECHO NO OTHER USERS ADDED
-foreach ($users as $user) {
-    // debug_to_console($user);
-?>
-
-    <!-- exisiting projects cards -->
-    <div class="row-6">
-        <div class="col-sm-4 mt-4">
-            <div class="card user-card">
-                <a class="">
-                    <div id="userCard" class="user-card card-body d-flex justify-content-left align-items-center">
-                        <p class="card-text">
-                        <h4 class="text-center"><?php echo $user["user_name"] . " " . $user["user_surname"]; ?></h4>
-                        <a id="showDelUser" class="bi bi-trash ml-auto" data-toggle="modal" data-target="#removeUserModal" data-user="<?php echo $user["user_id"]; ?>"></a>
-                        </p>
+                        <div class="card-text">
+                            <h4 class="text-center pt-5"><?php echo $user["user_name"] . " " . $user["user_surname"]; ?></h4>
+                            <p class="text-center"><?php echo $user["user_email"] ?></p>
+                        </div>
 
                     </div>
-
-
-                </a>
-
+                    <div class="card-footer bg-transparent border-top-0 ">
+                        <div class="footer-content">
+                            <a id="showDelUserIcon" class="bi bi-trash ml-auto d-flex flex-column align-items-center" data-toggle="modal" data-target="#removeUserModal" data-user="<?php echo $user["user_id"]; ?>"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-<?php } ?>
+    <?php
+        }
+    } else {
+        echo "<p>No other users in this project</p>";
+    }
 
+    ?>
+</div>
 <?php include_once 'footer.php' ?>

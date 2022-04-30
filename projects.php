@@ -1,6 +1,10 @@
 <?php
 include_once 'navbar.php';
 include_once 'scripts/projects.php';
+// unset any project in session when on this page
+if (isset($_SESSION['projectid'])) {
+    unset($_SESSION['projectid']);
+}
 ?>
 
 <!-- New Project Modal -->
@@ -116,6 +120,32 @@ include_once 'scripts/projects.php';
     </div>
 </div>
 
+<!-- leave project modal -->
+<div class="modal fade" id="leaveProjectModal" tabindex="-1" role="dialog" aria-labelledby="leaveProjectModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Are you sure you want to leave this project?</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            <form action="scripts/projects.php" method="post">
+                <div class="modal-body">
+                    You will be removed from this project. All the Project data will remain.
+                    <input type="text" class="form-control project" id="delUserFromProjectId" name="delUserFromProjectId" readonly>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-center align-items-center">
+
+                    <button type="button" class="btn btn-success flex-grow-1" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger flex-grow-1" name="removeUserFromProject">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- new project button -->
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#projectModal"><span class="bi bi-plus white">New Project</span></button>
 </div>
@@ -171,31 +201,35 @@ include_once 'scripts/projects.php';
 
     <?php
     $addedProjects = getAddedToProjects();
-    foreach ($addedProjects as $addedProject) {
+    if ($addedProjects !== NULL) {
+        foreach ($addedProjects as $addedProject) {
     ?>
-        <!-- exisiting projects cards -->
-        <div class="col-sm-3 mt-4">
-            <div class="project-card card shadow">
-                <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $addedProject["id"] ?>&projectname=<?php echo $addedProject["project_name"] ?>">
+            <!-- exisiting projects cards -->
+            <div class="col-sm-3 mt-4">
+                <div class="project-card card shadow">
+                    <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $addedProject["id"] ?>&projectname=<?php echo $addedProject["project_name"] ?>">
 
-                    <div class="project-body card-body d-flex justify-content-center align-items-center">
-                        <p class="card-text">
-                        <h2 class="text-center"><?php echo $addedProject["project_name"] ?></h2>
-                        </p>
+                        <div class="project-body card-body d-flex justify-content-center align-items-center">
+                            <p class="card-text">
+                            <h2 class="text-center"><?php echo $addedProject["project_name"] ?></h2>
+                            </p>
 
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0">
-                        <i class="px-1 fa-solid fa-user black fa-lg"></i>
-                        <div class="footer-content">
-                            <a class="px-1 fa-solid fa-arrow-right-from-bracket float-right" id="leaveProject"></a>
                         </div>
-                    </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <i class="px-1 fa-solid fa-user black fa-lg"></i>
+                            <div class="footer-content">
+                                <a class="px-1 fa-solid fa-arrow-right-from-bracket float-right" id="leaveProject" data-toggle="modal" data-target="#leaveProjectModal" data-id="<?php echo $addedProject["id"] ?>"></a>
+                            </div>
+                        </div>
 
-                </a>
+                    </a>
 
+                </div>
             </div>
-        </div>
-    <?php } ?>
+    <?php
+        }
+    }
+    ?>
 </div>
 
 <?php include_once 'footer.php' ?>

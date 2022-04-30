@@ -192,7 +192,7 @@ function addUserToProject($conn, $project_id, $userData)
     };
 }
 
-// remove user from a project
+// remove user from a project in project settings page
 function removeUserProject($conn, $userId, $projectId)
 {
     $query = "DELETE FROM usersaddedtoprojects WHERE project_id='$projectId' AND user_id = '$userId';";
@@ -205,9 +205,17 @@ function removeUserProject($conn, $userId, $projectId)
     };
 }
 
-// check project creator
-function checkIfAddedUser()
+// leave a project from projects page
+function leaveProject($conn, $userId, $projectId)
 {
+    $query = "DELETE FROM usersaddedtoprojects WHERE project_id='$projectId' AND user_id = '$userId';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../projects.php?error=none&message=userremoved");
+        exit();
+    } else {
+        header("location: ../projects.php?error=couldnotremoveuser");
+        exit();
+    };
 }
 
 // create subtask
@@ -266,4 +274,19 @@ function changeUserInTask($conn, $taskId, $userId)
         header("location: ../tasks.php.php?error=changeusernotupdated");
         exit();
     };
+}
+
+// get currently logged in users details
+function currentDetails()
+{
+    $user = $_SESSION["user_id"];
+    $query = "SELECT user_name, user_surname, user_email FROM tbl_users WHERE id = '$user';";
+    $result = mysqli_query(OpenCon(), $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $userdata[] = $row;
+            debug_to_console($row);
+        }
+        return $userdata;
+    }
 }

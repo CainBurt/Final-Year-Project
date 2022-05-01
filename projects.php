@@ -165,38 +165,41 @@ if (isset($_SESSION['projectid'])) {
 
     <!-- PROJECTS YOU HAVE CREATED -->
     <?php
+    // PUT IF TO CHECK IF SET
     $projects = getAllProjects();
-    foreach ($projects as $project) {
-        $projectId = $project["id"];
-        $projectName = $project["project_name"];
-        $projectDesc = $project["project_description"];
-        $projectStart = $project["project_start"];
-        $projectEnd = $project["project_end"];
+    if (isset($projects)) {
+        foreach ($projects as $project) {
+            $projectId = $project["id"];
+            $projectName = $project["project_name"];
+            $projectDesc = $project["project_description"];
+            $projectStart = $project["project_start"];
+            $projectEnd = $project["project_end"];
     ?>
 
-        <!-- exisiting projects cards -->
-        <div class="col-sm-3 mt-4">
-            <div class="project-card card shadow">
-                <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $projectId ?>&projectname=<?php echo $projectName ?>">
-                    <div class="project-body card-body d-flex justify-content-center align-items-center">
-                        <p class="card-text">
-                        <h2 class="text-center"><?php echo $projectName ?></h2>
-                        </p>
+            <!-- exisiting projects cards -->
+            <div class="col-sm-3 mt-4">
+                <div class="project-card card shadow">
+                    <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $projectId ?>&projectname=<?php echo $projectName ?>">
+                        <div class="project-body card-body d-flex justify-content-center align-items-center">
+                            <p class="card-text">
+                            <h2 class="text-center"><?php echo $projectName ?></h2>
+                            </p>
 
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0">
-                        <div class="footer-content">
-                            <a class="bi bi-trash float-left project-item" id="deleteProject" data-toggle="modal" data-target="#deleteModal" data-project="<?php echo $projectId ?>"></a>
-                            <a class="bi bi-pencil-square float-right" id="editProject" data-toggle="modal" data-target="#editProjectModal" data-id="<?php echo $projectId ?>" data-title="<?php echo $projectName ?>" data-desc="<?php echo $projectDesc ?>" data-start="<?php echo $projectStart ?>" data-end="<?php echo $projectEnd ?>"></a>
                         </div>
-                    </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <div class="footer-content">
+                                <a class="bi bi-trash float-left project-item" id="deleteProject" data-toggle="modal" data-target="#deleteModal" data-project="<?php echo $projectId ?>"></a>
+                                <a class="bi bi-pencil-square float-right" id="editProject" data-toggle="modal" data-target="#editProjectModal" data-id="<?php echo $projectId ?>" data-title="<?php echo $projectName ?>" data-desc="<?php echo $projectDesc ?>" data-start="<?php echo $projectStart ?>" data-end="<?php echo $projectEnd ?>"></a>
+                            </div>
+                        </div>
 
-                </a>
+                    </a>
 
+                </div>
             </div>
-        </div>
 
-    <?php } ?>
+    <?php }
+    } ?>
     <!-- PROJECTS YOU HAVE BEEN ADDED TO -->
 
     <?php

@@ -130,6 +130,18 @@ function emailExists($conn, $email)
     mysqli_stmt_close($stmt);
 };
 
+//checks the two fields match
+function passwordMatch($password, $confirmPassword)
+{
+
+    if ($password !== $confirmPassword) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+};
+
 // create account
 function createUser($conn, $name, $surname, $email, $password)
 {
@@ -137,6 +149,7 @@ function createUser($conn, $name, $surname, $email, $password)
         header("location: ../?error=emailtaken");
         exit();
     }
+
     // hash password
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO tbl_users(user_name, user_surname, user_email, user_password) VALUES ('$name', '$surname', '$email', '$hash');";
@@ -289,4 +302,54 @@ function currentDetails()
         }
         return $userdata;
     }
+}
+
+function changeUserName($conn, $id, $name, $surname)
+{
+    $query = "UPDATE tbl_users SET user_name='$name', user_surname='$surname' WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../profile.php?error=none&message=namechangesuccess");
+        exit();
+    } else {
+        header("location: ../profile.php.php?error=changeusernamenotupdated");
+        exit();
+    };
+}
+
+function changeUserEmail($conn, $id, $email)
+{
+    $query = "UPDATE tbl_users SET user_email='$email' WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../profile.php?error=none&message=emailchangesuccess");
+        exit();
+    } else {
+        header("location: ../profile.php.php?error=changeuseremailnotupdated");
+        exit();
+    };
+}
+
+function changeUserPassword($conn, $id, $password)
+{
+    // hash password
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $query = "UPDATE tbl_users SET user_password='$hash' WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../profile.php?error=none&message=passwordchangesuccess");
+        exit();
+    } else {
+        header("location: ../profile.php.php?error=changeuserpasswordnotupdated");
+        exit();
+    };
+}
+
+function deleteUserAccount($conn, $id)
+{
+    $query = "DELETE FROM tbl_users WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../index.php?error=none&message=accountdeletesuccess");
+        exit();
+    } else {
+        header("location: ../profile.php?error=couldnotdeleteaccount");
+        exit();
+    };
 }

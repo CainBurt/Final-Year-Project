@@ -1,6 +1,14 @@
 <?php
-include_once 'navbar.php';
 include_once 'scripts/projects.php';
+
+// redirects if user isnt logged in
+if (!isset($_SESSION['user_id'])) {
+    header('location: ../fyp/index.php');
+    exit();
+}
+
+include_once 'navbar.php';
+
 // unset any project in session when on this page
 if (isset($_SESSION['projectid'])) {
     unset($_SESSION['projectid']);

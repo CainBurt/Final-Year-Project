@@ -12,8 +12,48 @@ if (!isset($_SESSION['projectid'])) {
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Tasks and Subtasks</h1>
-    <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#projectModal"><span class="bi bi-plus white">New Task</span></button>
+    <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#createTaskModal"><span class="bi bi-plus white">New Task</span></button>
 </div>
+
+<!-- Create Task Modal Popup-->
+<div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="createTaskModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">New Task</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            <form action="scripts/tasks.php" method="post">
+                <div class="modal-body">
+                    <input type="text" class="form-control list-name" id="list" name="list" readonly value="1" hidden>
+                    <div class="form-group">
+                        <label>Task Name:</label>
+                        <input type="text" class="form-control" id="task" name="task" placeholder="Task Title">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Start Date:</label>
+                            <input type="date" class="form-control" id="start" name="start" value="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
+
+                        <div class="col">
+                            <label>End Date:</label>
+                            <input type="date" class="form-control" id="end" name="end" value="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" name="saveTask">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Add or Change user modal -->
 <div class="modal fade" id="changeUser" tabindex="-1" role="dialog" aria-labelledby="changeUser" aria-hidden="true">
@@ -26,10 +66,9 @@ if (!isset($_SESSION['projectid'])) {
             </div>
             <form action="scripts/tasks.php" method="post">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Task Id:</label>
-                        <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly>
-                    </div>
+
+                    <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly hidden>
+
 
                     <div class="form-group">
                         <label>Choose A User:</label>
@@ -68,10 +107,7 @@ if (!isset($_SESSION['projectid'])) {
             </div>
             <form action="scripts/tasks.php" method="post">
                 <div class="modal-body">
-
-                    <div class="form-group">
-                        <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly>
-                    </div>
+                    <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly hidden>
                     <div class="form-group">
                         <label>Subtask Name:</label>
                         <input type="text" class="form-control" id="subtaskname" name="subtaskname" placeholder="Subtask Name">
@@ -99,10 +135,8 @@ if (!isset($_SESSION['projectid'])) {
             <form action="scripts/tasks.php" method="post">
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="list-name" class="col-form-label">Task Id:</label>
-                        <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly>
-                    </div>
+                    <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly hidden>
+
                     <div class="form-group">
                         <label>Task Name:</label>
                         <input type="text" class="form-control task-title" id="task-title" name="task-title" placeholder="Task Title">
@@ -142,10 +176,10 @@ if (!isset($_SESSION['projectid'])) {
             </div>
             <form action="scripts/tasks.php" method="post">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <!-- <label for="list-name" class="col-form-label">Subtask Id:</label> -->
-                        <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly hidden>
-                    </div>
+
+
+                    <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly hidden>
+
                     <div class="form-group">
                         <label>Task Name:</label>
                         <input type="text" class="form-control task-title" id="task-title" name="task-title" placeholder="Task Title">

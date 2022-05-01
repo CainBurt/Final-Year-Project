@@ -10,6 +10,11 @@ if (isset($_POST["saveProject"])) {
     $projectEnd = sanitiseInputs($_POST["projectEnd"]);
     $creatorId = $_SESSION['user_id'];
 
+    if ($projectStart >= $projectEnd) {
+        header("location: ../projects.php?error=invaliddates");
+        exit();
+    };
+
     saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd, $creatorId);
     CloseCon($conn);
     exit();
@@ -19,6 +24,10 @@ if (isset($_POST["saveProject"])) {
     $desc = $_POST["projectDesc"];
     $start = $_POST["projectStart"];
     $end = $_POST["projectEnd"];
+    if ($start >= $end) {
+        header("location: ../projects.php?error=invaliddates");
+        exit();
+    };
     updateProject(OpenCon(), $id, $title, $desc, $start, $end);
     CloseCon($conn);
 } else if (isset($_POST["deleteProject"])) {
@@ -36,7 +45,7 @@ if (isset($_POST["saveProject"])) {
     $emailExists = emailExists(OpenCon(), $email);
     $project_id = $_SESSION['projectid'];
 
-    if ($emailExists !== false) {
+    if ($emailExists !== false && userAlreadyAddedToProject($email) !== TRUE && userCreatedProject($project_id, $email) !== TRUE) {
         addUserToProject(OpenCon(), $project_id, $emailExists);
         CloseCon($conn);
     } else {

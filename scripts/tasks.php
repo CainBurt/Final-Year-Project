@@ -9,6 +9,12 @@ if (isset($_POST["saveTask"])) {
     $taskLabelId = $_POST["list"];
     $startDate = $_POST["start"];
     $endDate = $_POST["end"];
+
+    if ($startDate >= $endDate) {
+        header("location: ../kanban.php?error=invaliddates");
+        exit();
+    };
+
     createTask(OpenCon(), $taskTitle, $taskLabelId, $startDate, $endDate);
     CloseCon($conn);
     exit();
@@ -18,6 +24,12 @@ if (isset($_POST["saveTask"])) {
     $updatedTitle = $_POST["task-title"];
     $startDate = $_POST["task-start"];
     $endDate = $_POST["task-end"];
+
+    if ($startDate >= $endDate) {
+        header("location: ../kanban.php?error=invaliddates");
+        exit();
+    };
+
     updateTask(OpenCon(), $taskId, $updatedTitle, $startDate, $endDate);
     CloseCon($conn);
     exit();
@@ -44,8 +56,7 @@ if (isset($_POST["saveTask"])) {
 } elseif (isset($_POST["changeUser"])) {
     $taskId = $_POST["task-id"];
     $userId = $_POST["user"];
-    debug_to_console($taskId);
-    debug_to_console($userId);
+
     changeUserInTask(OpenCon(), $taskId, $userId);
     CloseCon($conn);
 } else {

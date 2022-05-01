@@ -38,6 +38,7 @@ $(document).ready(function() {
 
     });
 
+
     //shows the data in the leave project
     $("#leaveProjectModal").on("show.bs.modal", function(event) {
         var button = $(event.relatedTarget);

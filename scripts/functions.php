@@ -29,7 +29,8 @@ function createTask($conn, $taskTitle, $taskLabelId, $start, $end)
     $sql = "INSERT INTO tbl_tasks(title, label_id, task_start, task_end, project_id) VALUES ('$taskTitle', '$taskLabelId', '$start', '$end', '$project');";
 
     if (mysqli_query($conn, $sql)) {
-        header("location: ../kanban.php?error=none&message=createsuccess");
+        // header("location: ../kanban.php?error=none&message=createsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createsuccess");
         exit();
     } else {
         header("location: ../kanban.php?errortasknotadded");
@@ -43,7 +44,8 @@ function updateTask($conn, $taskId, $updatedTitle, $start, $end)
     $query = "UPDATE tbl_tasks SET title='$updatedTitle', task_start='$start', task_end='$end' WHERE id='$taskId';";
 
     if (mysqli_query($conn, $query)) {
-        header("location: ../kanban.php?error=none&message=editsuccess");
+        // header("location: ../kanban.php?error=none&message=editsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=editsuccess");
         exit();
     } else {
         header("location: ../kanban.php.php?error=tasknotupdated");
@@ -56,7 +58,8 @@ function deleteTask($conn, $taskId)
 {
     $query = "DELETE FROM tbl_tasks WHERE id='$taskId';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../kanban.php?error=none&message=deletesuccess");
+        // header("location: ../kanban.php?error=none&message=deletesuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=deletesuccess");
         exit();
     } else {
         header("location: ../kanban.php.php?error=tasknotdeleted");
@@ -352,4 +355,32 @@ function deleteUserAccount($conn, $id)
         header("location: ../profile.php?error=couldnotdeleteaccount");
         exit();
     };
+}
+
+// check user isnt currently in the project or the project creator.
+function userAlreadyAddedToProject($email)
+{
+    $project_id = $_SESSION['projectid'];
+    $query = "SELECT * FROM tbl_users INNER JOIN usersaddedtoprojects ON usersaddedtoprojects.user_id = tbl_users.id WHERE project_id='$project_id' AND user_email='$email';";
+    $result = mysqli_query(OpenCon(), $query);
+    if (mysqli_num_rows($result) > 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+};
+
+function userCreatedProject($projectId, $email)
+{
+    // $query = "SELECT * FROM tbl_projects WHERE id='$project_id' AND creator_id='$user_id';";
+    $query = "SELECT * FROM tbl_projects INNER JOIN tbl_users on tbl_users.id = tbl_projects.creator_id WHERE tbl_projects.id='$projectId' AND user_email='$email';";
+    $result = mysqli_query(OpenCon(), $query);
+
+    if (mysqli_num_rows($result) == 1) {
+        // echo "User Did created project"
+        return TRUE;
+    } else {
+        return FALSE;
+        // echo "User didnt Created Project";
+    }
 }

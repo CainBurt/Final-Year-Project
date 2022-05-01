@@ -24,12 +24,14 @@ if (isset($_SESSION['projectid'])) {
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
             </div>
-            <form action="scripts/projects.php" method="post">
+            <form action="scripts/projects.php" method="post" id="newProjectForm" class="was-validated">
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label>Project Name:</label>
                         <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" required>
+                        <!-- <div class="valid-feedback">Valid.</div> -->
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group">
                         <label>Project Description:</label>
@@ -93,11 +95,8 @@ if (isset($_SESSION['projectid'])) {
             </div>
             <form action="scripts/projects.php" method="post">
                 <div class="modal-body">
+                    <input type="text" class="form-control project-id" id="projectId" name="projectId" placeholder="Project Id" readonly hidden>
 
-                    <div class="form-group">
-                        <label>Project Id:</label>
-                        <input type="text" class="form-control project-id" id="projectId" name="projectId" placeholder="Project Id" readonly>
-                    </div>
                     <div class="form-group">
                         <label>Project Name:</label>
                         <input type="text" class="form-control project-name" id="projectName" name="projectName" placeholder="Project Name">
@@ -140,7 +139,7 @@ if (isset($_SESSION['projectid'])) {
             <form action="scripts/projects.php" method="post">
                 <div class="modal-body">
                     You will be removed from this project. All the Project data will remain.
-                    <input type="text" class="form-control project" id="delUserFromProjectId" name="delUserFromProjectId" readonly>
+                    <input type="text" class="form-control project" id="delUserFromProjectId" name="delUserFromProjectId" readonly hidden>
                 </div>
 
                 <div class="modal-footer d-flex justify-content-center align-items-center">

@@ -27,8 +27,51 @@ include_once 'navbar.php';
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Calendar</h1>
-    <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#projectModal"><span class="bi bi-plus white">New Task</span></button>
+    <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#createTaskModal"><span class="bi bi-plus white">New Task</span></button>
 </div>
+
+<!-- Create Task Modal Popup-->
+<div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="createTaskModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">New Task</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            <form action="scripts/tasks.php" method="post">
+                <div class="modal-body">
+
+                    <input type="text" class="form-control list-name" id="list" name="list" readonly value="1">
+
+                    <div class="form-group">
+                        <label>Task Name:</label>
+                        <input type="text" class="form-control" id="task" name="task" placeholder="Task Title">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Start Date:</label>
+                            <input type="date" class="form-control" id="start" name="start" value="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
+
+                        <div class="col">
+                            <label>End Date:</label>
+                            <input type="date" class="form-control" id="end" name="end" value="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" name="saveTask">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="response"></div>
 <div class="container">
     <div id='calendar'></div>

@@ -28,10 +28,9 @@ include_once 'navbar.php';
             <form action="scripts/tasks.php" method="post">
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="list-name" class="col-form-label">List:</label>
-                        <input type="text" class="form-control list-name" id="list" name="list" readonly>
-                    </div>
+
+                    <input type="text" class="form-control list-name" id="list" name="list" readonly hidden>
+
                     <div class="form-group">
                         <label>Task Name:</label>
                         <input type="text" class="form-control" id="task" name="task" placeholder="Task Title">
@@ -70,10 +69,8 @@ include_once 'navbar.php';
             <form action="scripts/tasks.php" method="post">
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="list-name" class="col-form-label">Task Id:</label>
-                        <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly>
-                    </div>
+                    <input type="text" class="form-control task-id" id="task-id" name="task-id" readonly hidden>
+
                     <div class="form-group">
                         <label>Task Name:</label>
                         <input type="text" class="form-control task-title" id="task-title" name="task-title" placeholder="Task Title">

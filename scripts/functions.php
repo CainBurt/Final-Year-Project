@@ -384,3 +384,30 @@ function userCreatedProject($projectId, $email)
         // echo "User didnt Created Project";
     }
 }
+
+// upload file function
+function uploadFile($conn, $filename, $size, $projectId, $uploader_id)
+{
+    $query = "INSERT INTO tbl_files (filename, filesize, uploader_id, project_id) VALUES ('$filename', '$size', '$uploader_id', '$projectId')";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../files.php?error=none&message=uploadedfile");
+        exit();
+    } else {
+        header("location: ../files.php?error=couldnotuploadfile");
+        exit();
+    };
+}
+
+// get all files for the current project
+function getAllFiles()
+{
+    $project_id = $_SESSION['projectid'];
+    $query = "SELECT * FROM tbl_files WHERE project_id = '$project_id';";
+    $result = mysqli_query(OpenCon(), $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $filesData[] = $row;
+        }
+        return $filesData;
+    }
+}

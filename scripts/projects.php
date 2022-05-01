@@ -45,7 +45,7 @@ if (isset($_POST["saveProject"])) {
     $emailExists = emailExists(OpenCon(), $email);
     $project_id = $_SESSION['projectid'];
 
-    if ($emailExists !== false && userAlreadyAddedToProject($email) !== TRUE && userCreatedProject($project_id, $email) !== TRUE) {
+    if ($emailExists !== false && userAlreadyAddedToProject($email) !== TRUE) {
         addUserToProject(OpenCon(), $project_id, $emailExists);
         CloseCon($conn);
     } else {

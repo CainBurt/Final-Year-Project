@@ -411,3 +411,11 @@ function getAllFiles()
         return $filesData;
     }
 }
+
+function getFileForDownload($conn, $id)
+{
+    $query = "SELECT * FROM tbl_files WHERE id='$id'";
+    $result = mysqli_query($conn, $query);
+    $file = mysqli_fetch_assoc($result);
+    return $file;
+}

@@ -25,3 +25,23 @@ if (isset($_POST['uploadFile'])) {
         }
     }
 }
+
+if (isset($_GET['file_id'])) {
+    $id = $_GET['file_id'];
+    $file = getFileForDownload(OpenCon(), $id);
+    // CloseCon($conn);
+    $filepath = $_SERVER['DOCUMENT_ROOT'] . '/fyp/uploads/' . $file['filename'];
+
+    if (file_exists($filepath)) {
+        header('Content-Type: application/octet-stream');
+        header('Content-Description: File Transfer');
+        header('Content-Disposition: attachment; filename=' . basename($filepath));
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($_SERVER['DOCUMENT_ROOT'] . '/fyp/uploads/' . $file['name']));
+
+        readfile($_SERVER['DOCUMENT_ROOT'] . '/fyp/uploads/' . $file['name']);
+        exit();
+    }
+}

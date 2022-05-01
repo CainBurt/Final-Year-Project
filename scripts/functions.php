@@ -419,3 +419,15 @@ function getFileForDownload($conn, $id)
     $file = mysqli_fetch_assoc($result);
     return $file;
 }
+
+function deleteFile($conn, $id)
+{
+    $query = "DELETE FROM tbl_files WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../fyp/files.php?error=none&message=deletesuccess");
+        exit();
+    } else {
+        header("location: ../files.php?error=filenotdeleted");
+        exit();
+    };
+}

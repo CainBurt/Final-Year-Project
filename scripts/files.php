@@ -45,3 +45,14 @@ if (isset($_GET['file_id'])) {
         exit();
     }
 }
+
+if (isset($_GET['del_file_id'])) {
+    $id = $_GET['del_file_id'];
+    $file = getFileForDownload(OpenCon(), $id);
+    $filename = $file["filename"];
+    $delPath = $_SERVER['DOCUMENT_ROOT'] . '/fyp/uploads/' . $filename;
+    if (unlink($delPath)) {
+        deleteFile(OpenCon(), $id);
+        CloseCon($conn);
+    }
+}

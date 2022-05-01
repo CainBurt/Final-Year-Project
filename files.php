@@ -72,7 +72,7 @@ include_once 'navbar.php';
                         <td> <?php echo $file["filesize"] . " MB"; ?></td>
                         <td class="d-flex justify-content-around">
                             <a href="files.php?file_id=<?php echo $file["id"]; ?>" data-toggle="tooltip" title="Download File"><i class="fa-solid fa-file-arrow-down"></i></a>
-                            <a href="" data-toggle="tooltip" title="Delete File"><i class="bi bi-trash"></i></a>
+                            <a href="files.php?del_file_id=<?php echo $file["id"] ?>" data-toggle="tooltip" title="Delete File"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
 

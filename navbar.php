@@ -103,6 +103,12 @@ if (isset($_SESSION["projectid"])) {
                                 <span class="menu-collapsed">Files</span>
                             </div>
                         </a>
+                        <a href="/fyp/discussion.php" class="list-group-item list-group-item-action bg-light border-0">
+                            <div class="d-flex w-100 justify-content-start align-items-center">
+                                <span class="fa-solid fa-comment fa-fw mr-3"></span>
+                                <span class="menu-collapsed">Discussion</span>
+                            </div>
+                        </a>
                         <div class="d-flex p-2 align-items-end">
                             <button type="submit" class="btn btn-success flex-grow-1" data-toggle="modal" data-target="#addUserModal" name="Add User">
                                 <span class="fa-solid fa-plus"></span>
@@ -208,6 +214,13 @@ if (isset($_SESSION["projectid"])) {
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-file fa-fw mr-3"></span>
                         <span class="menu-collapsed">Files</span>
+                    </div>
+                </a>
+
+                <a href="/fyp/discussion.php" class="list-group-item list-group-item-action bg-light border-0">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa-solid fa-comment fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Discussion</span>
                     </div>
                 </a>
                 <?php

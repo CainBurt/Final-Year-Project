@@ -174,6 +174,7 @@ if (isset($_SESSION['projectid'])) {
     <?php
     // PUT IF TO CHECK IF SET
     $projects = getAllProjects();
+    $projectId = "";
     if (isset($projects)) {
         foreach ($projects as $project) {
             $projectId = $project["id"];
@@ -213,30 +214,32 @@ if (isset($_SESSION['projectid'])) {
     $addedProjects = getAddedToProjects();
     if ($addedProjects !== NULL) {
         foreach ($addedProjects as $addedProject) {
+            if ($addedProject["id"] !== $projectId) {
     ?>
-            <!-- exisiting projects cards -->
-            <div class="col-sm-3 mt-4">
-                <div class="project-card card shadow">
-                    <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $addedProject["id"] ?>&projectname=<?php echo $addedProject["project_name"] ?>">
+                <!-- exisiting projects cards -->
+                <div class="col-sm-3 mt-4">
+                    <div class="project-card card shadow">
+                        <a class="projectClickable" href="scripts/projects.php?projectid=<?php echo $addedProject["id"] ?>&projectname=<?php echo $addedProject["project_name"] ?>">
 
-                        <div class="project-body card-body d-flex justify-content-center align-items-center">
-                            <p class="card-text">
-                            <h2 class="text-center"><?php echo $addedProject["project_name"] ?></h2>
-                            </p>
+                            <div class="project-body card-body d-flex justify-content-center align-items-center">
+                                <p class="card-text">
+                                <h2 class="text-center"><?php echo $addedProject["project_name"] ?></h2>
+                                </p>
 
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0">
-                            <i class="px-1 fa-solid fa-user black fa-lg"></i>
-                            <div class="footer-content">
-                                <a class="px-1 fa-solid fa-arrow-right-from-bracket float-right" id="leaveProject" data-toggle="modal" data-target="#leaveProjectModal" data-id="<?php echo $addedProject["id"] ?>"></a>
                             </div>
-                        </div>
+                            <div class="card-footer bg-transparent border-top-0">
+                                <i class="px-1 fa-solid fa-user black fa-lg"></i>
+                                <div class="footer-content">
+                                    <a class="px-1 fa-solid fa-arrow-right-from-bracket float-right" id="leaveProject" data-toggle="modal" data-target="#leaveProjectModal" data-id="<?php echo $addedProject["id"] ?>"></a>
+                                </div>
+                            </div>
 
-                    </a>
+                        </a>
 
+                    </div>
                 </div>
-            </div>
     <?php
+            }
         }
     }
     ?>

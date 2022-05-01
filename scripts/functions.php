@@ -431,3 +431,57 @@ function deleteFile($conn, $id)
         exit();
     };
 }
+
+function createDiscussion($conn, $content)
+{
+    $userId = $_SESSION["user_id"];
+    $project = $_SESSION["projectid"];
+    $sql = "INSERT INTO tbl_discussion(dis_content, project_id, creator_id) VALUES ('$content', '$project', '$userId');";
+
+    if (mysqli_query($conn, $sql)) {
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        exit();
+    } else {
+        header("location: ../discussion.php?errorpostnotadded");
+        exit();
+    };
+}
+
+function getAllDiscussions()
+{
+    $project_id = $_SESSION['projectid'];
+    $query = "SELECT tbl_discussion.id, dis_content, project_id, creator_id, user_name, user_surname FROM tbl_discussion INNER JOIN tbl_users on  tbl_discussion.creator_id = tbl_users.id WHERE project_id = '$project_id';";
+    $result = mysqli_query(OpenCon(), $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $discussionData[] = $row;
+        }
+        return $discussionData;
+    }
+}
+
+function createReply($conn, $content, $discussionId)
+{
+    $userId = $_SESSION["user_id"];
+    $sql = "INSERT INTO tbl_reply(reply_content, discussion_id, creator_id) VALUES ('$content', '$discussionId', '$userId');";
+
+    if (mysqli_query($conn, $sql)) {
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        exit();
+    } else {
+        header("location: ../discussion.php?errorpostnotadded");
+        exit();
+    };
+}
+
+function getAllReply($discussionId)
+{
+    $query = "SELECT tbl_reply.id, reply_content, discussion_id, creator_id, user_name, user_surname FROM tbl_reply INNER JOIN tbl_users on  tbl_reply.creator_id = tbl_users.id WHERE discussion_id = '$discussionId';";
+    $result = mysqli_query(OpenCon(), $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $discussionData[] = $row;
+        }
+        return $discussionData;
+    }
+}

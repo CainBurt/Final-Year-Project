@@ -43,7 +43,7 @@ include_once 'navbar.php';
 </div>
 
 <!-- File table -->
-<div class="row">
+<div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -62,12 +62,16 @@ include_once 'navbar.php';
                     <tr>
                         <?php $users = getAllUsersInProject();
                         foreach ($users as $user) {
-                            if ($file["uploader_id"] == $user["id"]) {
-
                         ?>
+                            <?php if ($file["uploader_id"] == $user["id"]) { ?>
                                 <td> <?php echo $user["user_name"] . " " . $user["user_surname"]; ?></td>
-                        <?php }
-                        } ?>
+                            <?php } else { ?>
+                                <!-- <td>Uploader Not Found</td> -->
+                            <?php }; ?>
+                        <?php
+                        }
+                        ?>
+
                         <td> <?php echo $file["filename"]; ?></td>
                         <td> <?php echo $file["filesize"] . " MB"; ?></td>
                         <td class="d-flex justify-content-around">

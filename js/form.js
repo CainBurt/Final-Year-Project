@@ -125,6 +125,15 @@ $(document).ready(function() {
         modal.find(".modal-body input.task-id").val(taskId);
     });
 
+    // put post id in reply modal
+    $("#postReplyModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var discussionid = button.data("post");
+        var modal = $(this);
+        modal.find(".modal-title").text("Change User on Task");
+        modal.find(".modal-body input.discussionid").val(discussionid);
+    });
+
 
 });
 

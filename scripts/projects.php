@@ -115,7 +115,3 @@ if (isset($_POST["saveProject"])) {
         }
     }
 }
-
-if (isset($_DELETE["deleteProject"])) {
-    echo "DLETE THIS PROJECT?";
-}

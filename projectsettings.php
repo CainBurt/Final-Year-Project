@@ -1,4 +1,13 @@
 <?php
+include_once 'scripts/tasks.php';
+// redirects if project variable isnt set
+if (!isset($_SESSION['projectid'])) {
+    header('location: ../fyp/projects.php');
+    exit();
+}
+?>
+
+<?php
 include_once 'navbar.php';
 include_once 'scripts/projects.php';
 ?>

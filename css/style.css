@@ -233,3 +233,9 @@
         border: #c3e6c3 1px solid;
         display: inline-block;
     } */
+    /* discussion board styling */
+    
+    .hide,
+    .hideReply {
+        display: none;
+    }

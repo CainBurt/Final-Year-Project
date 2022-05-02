@@ -485,3 +485,27 @@ function getAllReply($discussionId)
         return $discussionData;
     }
 }
+
+function deleteDiscussion($conn, $id)
+{
+    $query = "DELETE FROM tbl_discussion WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        exit();
+    } else {
+        header("location: ../fyp/discussion.php?error=postnotdeleted");
+        exit();
+    };
+}
+
+function deleteReply($conn, $id)
+{
+    $query = "DELETE FROM tbl_reply WHERE id='$id';";
+    if (mysqli_query($conn, $query)) {
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        exit();
+    } else {
+        header("location: ../fyp/discussion.php?error=replynotdeleted");
+        exit();
+    };
+}

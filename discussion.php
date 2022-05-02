@@ -71,15 +71,21 @@ include_once 'navbar.php';
 <?php
 $posts = getAllDiscussions();
 foreach ($posts as $post) {
+    if (userCreatedCurrentProject() == TRUE || $_SESSION["user_id"] == $post["creator_id"]) {
+        echo "<style>.hide{display:block}</style>";
+    }
 ?>
 
-    <div class="row-6 d-flex">
+    <div class="row-6 d-flex mt-2">
         <div>
             <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $post["user_name"]  . " " . $post["user_surname"] ?>"><?php echo $post["user_name"][0] . $post["user_surname"][0] ?></div>
         </div>
-        <div class="card flex-grow-1">
-            <div class="card-body">
-                <?php echo $post['dis_content'] ?>
+        <div class="card flex-grow-1 ">
+            <div class="card-body d-flex ">
+                <div class="flex-grow-1">
+                    <?php echo $post['dis_content'] ?>
+                </div>
+                <a href="scripts/discussion.php?del_post_id=<?php echo $post['id'] ?>" class="hide" data-toggle="tooltip" title="Delete Post"><i class="bi bi-trash"></i></a>
             </div>
             <div class="mx-5">
                 <div class="card-body ">
@@ -87,6 +93,7 @@ foreach ($posts as $post) {
                     $replys = getAllReply($post["id"]);
                     if (isset($replys)) {
                         foreach ($replys as $reply) {
+
                     ?>
                             <div class="d-flex card-body border-top">
                                 <div>
@@ -95,6 +102,13 @@ foreach ($posts as $post) {
                                 <div class="flex-grow-1">
                                     <?php echo $reply["reply_content"] ?>
                                 </div>
+                                <?php
+                                if (userCreatedCurrentProject() == TRUE || $_SESSION["user_id"] == $reply["creator_id"]) {
+                                    echo "<a href='scripts/discussion.php?del_reply_id=" . $reply['id'] . " data-toggle='tooltip' title='Delete Reply'><i class='bi bi-trash'></i></a>";
+                                }
+
+                                ?>
+
                             </div>
                     <?php
                         }

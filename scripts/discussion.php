@@ -18,3 +18,15 @@ if (isset($_POST['postReply'])) {
     CloseCon($conn);
     exit();
 }
+
+if (isset($_GET['del_post_id'])) {
+    $id = $_GET['del_post_id'];
+    deleteDiscussion(OpenCon(), $id);
+    CloseCon($conn);
+}
+
+if (isset($_GET['del_reply_id'])) {
+    $id = $_GET['del_reply_id'];
+    deleteReply(OpenCon(), $id);
+    CloseCon($conn);
+}

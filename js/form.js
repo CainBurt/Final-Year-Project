@@ -130,7 +130,6 @@ $(document).ready(function() {
         var button = $(event.relatedTarget);
         var discussionid = button.data("post");
         var modal = $(this);
-        modal.find(".modal-title").text("Change User on Task");
         modal.find(".modal-body input.discussionid").val(discussionid);
     });
 

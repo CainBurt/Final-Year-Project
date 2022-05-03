@@ -73,7 +73,9 @@ function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectE
     $sql = "INSERT INTO tbl_projects(project_name, project_description, project_start, project_end, creator_id) VALUES ('$projectName', '$projectDesc', '$projectStart', '$projectEnd', '$creatorId');";
 
     if (mysqli_query($conn, $sql)) {
-        header("location: ../projects.php?error=none&message=createprojectsuccess");
+        $GET_last_ID = mysqli_insert_id($conn);
+        addUserToProjectOnCreate($conn, $GET_last_ID, $creatorId);
+        // header("location: ../projects.php?error=none&message=createprojectsuccess");
         exit();
     } else {
         header("location: ../projects.php?error=projectnotadded");
@@ -201,6 +203,19 @@ function addUserToProject($conn, $project_id, $userData)
     $query = "INSERT INTO usersaddedtoprojects(user_id, project_id) VALUES ('$user_id', '$project_id');";
     if (mysqli_query($conn, $query)) {
         header("location: ../projectsettings.php?error=none&message=useradded");
+        exit();
+    } else {
+        header("location: ../?error=couldnotadduser");
+        exit();
+    };
+}
+
+// add a user to a project when project is created
+function addUserToProjectOnCreate($conn, $project_id, $user_id)
+{
+    $query = "INSERT INTO usersaddedtoprojects(user_id, project_id) VALUES ('$user_id', '$project_id');";
+    if (mysqli_query($conn, $query)) {
+        header("location: ../projects.php?error=none&message=useradded");
         exit();
     } else {
         header("location: ../?error=couldnotadduser");
@@ -385,6 +400,40 @@ function userCreatedProject($projectId, $email)
     }
 }
 
+function userCreatedProjectById($projectId, $id)
+{
+    // $query = "SELECT * FROM tbl_projects WHERE id='$project_id' AND creator_id='$user_id';";
+    $query = "SELECT * FROM tbl_projects INNER JOIN tbl_users on tbl_users.id = tbl_projects.creator_id WHERE tbl_projects.id='$projectId' AND tbl_users.id='$id';";
+    $result = mysqli_query(OpenCon(), $query);
+
+    if (mysqli_num_rows($result) >= 1) {
+        // echo "User Did created project"
+        return TRUE;
+    } else {
+        return FALSE;
+        // echo "User didnt Created Project";
+    }
+}
+
+function createdCurrentProject($userid)
+{
+
+    // get current project
+    $project_id = $_SESSION['projectid'];
+
+    // check if curent user created current project
+    $query = "SELECT * FROM tbl_projects WHERE id='$project_id' AND creator_id='$userid';";
+    $result = mysqli_query(OpenCon(), $query);
+
+    if (mysqli_num_rows($result) !== 0) {
+        // echo "User Did Not create project"
+        return TRUE;
+    } else {
+        return FALSE;
+        // echo "User Created Project";
+    }
+}
+
 // upload file function
 function uploadFile($conn, $filename, $size, $projectId, $uploader_id)
 {
@@ -508,4 +557,16 @@ function deleteReply($conn, $id)
         header("location: ../fyp/discussion.php?error=replynotdeleted");
         exit();
     };
+}
+
+function getUserNameById($id)
+{
+    $query = "SELECT user_name, user_surname FROM tbl_users WHERE id='$id'";
+    $result = mysqli_query(OpenCon(), $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $userName[] = $row;
+        }
+        return $userName;
+    }
 }

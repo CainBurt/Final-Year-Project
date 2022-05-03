@@ -42,7 +42,7 @@ include_once 'navbar.php';
             <form action="scripts/tasks.php" method="post">
                 <div class="modal-body">
 
-                    <input type="text" class="form-control list-name" id="list" name="list" readonly value="1">
+                    <input type="text" class="form-control list-name" id="list" name="list" readonly value="1" hidden>
 
                     <div class="form-group">
                         <label>Task Name:</label>
@@ -105,7 +105,7 @@ include_once 'navbar.php';
                     },
                     success: function(data) {
                         calendar.fullCalendar("refetchEvents");
-                        alert("Update completed")
+                        // alert("Update completed")
                     }
                 })
             },
@@ -128,7 +128,7 @@ include_once 'navbar.php';
                     },
                     success: function(data) {
                         calendar.fullCalendar("refetchEvents");
-                        alert("Update completed")
+                        // alert("Update completed")
                     }
                 })
             },

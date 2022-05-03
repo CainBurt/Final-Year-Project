@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 include_once 'navbar.php';
-
+include_once 'scripts/functions.php';
 // unset any project in session when on this page
 if (isset($_SESSION['projectid'])) {
     unset($_SESSION['projectid']);
@@ -212,9 +212,11 @@ if (isset($_SESSION['projectid'])) {
 
     <?php
     $addedProjects = getAddedToProjects();
+
     if ($addedProjects !== NULL) {
         foreach ($addedProjects as $addedProject) {
-            if ($addedProject["id"] !== $projectId) {
+            $created = userCreatedProjectById($addedProject["id"], $_SESSION["user_id"]);
+            if ($created !== TRUE) {
     ?>
                 <!-- exisiting projects cards -->
                 <div class="col-sm-3 mt-4">

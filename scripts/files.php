@@ -14,10 +14,12 @@ if (isset($_POST['uploadFile'])) {
     $uploader_id = $_SESSION['user_id'];
 
     // check file format
-    if (!in_array($extension, ['zip', 'pdf', 'png', 'txt'])) {
+    if (!in_array($extension, ['zip', 'pdf', 'png', 'txt', '.doc'])) {
         echo "Your file must be a .zip, .pdf .png or .txt";
     } elseif ($_FILES['file']['size'] > 100000) { //check file size
         echo "Your file is too large";
+    } elseif (file_exists($destination)) {
+        echo "File already exists";
     } else {
         if (move_uploaded_file($file, $destination)) {
             uploadFile(OpenCon(), $filename, $size, $projectId, $uploader_id);

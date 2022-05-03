@@ -51,9 +51,11 @@ include_once 'scripts/projects.php';
     if ($users !== NULL) {
         foreach ($users as $user) {
             // debug_to_console($user);
+            $created = createdCurrentProject($user["id"]);
+
     ?>
 
-            <!-- exisiting projects cards -->
+            <!-- user cards -->
             <div class="col-lg-2 mt-4">
                 <div class="user-card card shadow" id="addedUser">
                     <div class="card-body d-flex flex-column align-items-center">
@@ -62,12 +64,17 @@ include_once 'scripts/projects.php';
                         <div class="card-text">
                             <h4 class="text-center pt-5"><?php echo $user["user_name"] . " " . $user["user_surname"]; ?></h4>
                             <p class="text-center"><?php echo $user["user_email"] ?></p>
+
                         </div>
 
                     </div>
                     <div class="card-footer bg-transparent border-top-0 ">
                         <div class="footer-content">
-                            <a id="showDelUserIcon" class="bi bi-trash ml-auto d-flex flex-column align-items-center" data-toggle="modal" data-target="#removeUserModal" data-user="<?php echo $user["user_id"]; ?>"></a>
+                            <?php if ($created !== TRUE) { ?>
+                                <a id="showDelUserIcon" class="bi bi-trash ml-auto d-flex flex-column align-items-center" data-toggle="modal" data-target="#removeUserModal" data-user="<?php echo $user["user_id"]; ?>"></a>
+                            <?php } else {
+                                echo "<p class='ml-auto d-flex flex-column align-items-center'>(Project Creator)</p>";
+                            }; ?>
                         </div>
                     </div>
                 </div>

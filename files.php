@@ -56,21 +56,22 @@ include_once 'navbar.php';
         <tbody>
             <?php
             $files = getAllFiles();
+            $users = getAllUsersInProject();
             if (isset($files)) {
-
                 foreach ($files as $file) { ?>
                     <tr>
-                        <?php $users = getAllUsersInProject();
-                        foreach ($users as $user) {
-                        ?>
-                            <?php if ($file["uploader_id"] == $user["id"]) { ?>
-                                <td> <?php echo $user["user_name"] . " " . $user["user_surname"]; ?></td>
-                            <?php } else { ?>
-                                <!-- <td>Uploader Not Found</td> -->
-                            <?php }; ?>
+
                         <?php
-                        }
-                        ?>
+                        // checks if the uploader is still added to the project and displays name if they are.
+                        if (in_array($file["uploader_id"], array_column($users, 'id'))) {
+                            $userName = getUserNameById($file["uploader_id"]);
+                            foreach ($userName as $name) {
+                                echo "<td>" . $name["user_name"] . " " . $name["user_surname"] . "</td>";
+                            } ?>
+                        <?php } else { ?>
+                            <td>Uploader Not In Project</td>
+                        <?php }; ?>
+
 
                         <td> <?php echo $file["filename"]; ?></td>
                         <td> <?php echo $file["filesize"] . " MB"; ?></td>

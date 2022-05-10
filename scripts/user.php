@@ -13,7 +13,7 @@ if (isset($_POST["createAccount"])) {
 
     // check passwords match
     if (passwordMatch($password, $confirmPassword) !== false) {
-        header("location: ../index.php?error=passwordsdontmatch");
+        header("location: ../index.php?error=Passwords Do Not Match");
         exit();
     };
 
@@ -45,7 +45,7 @@ if (isset($_POST["createAccount"])) {
 
     // check passwords match
     if (passwordMatch($password, $confirmpassword) !== false) {
-        header("location: ../profile.php?error=passwordsdontmatch");
+        header("location: ../profile.php?error=Passwords Do Not Match");
         exit();
     };
 

@@ -37,7 +37,7 @@ if (!isset($_SESSION['projectid'])) {
 
                         <div class="col">
                             <label>End Date:</label>
-                            <input type="date" class="form-control" id="end" name="end" value="<?php echo date('Y-m-d'); ?>" required>
+                            <input type="date" class="form-control" id="end" name="end" value="<?php echo date('Y-m-d', strtotime('tomorrow')); ?>" required>
                         </div>
 
                     </div>

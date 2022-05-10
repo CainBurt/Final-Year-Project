@@ -13,6 +13,17 @@ $userDetails = currentDetails();
 foreach ($userDetails as $details) {
 }
 ?>
+
+<!-- error message -->
+<?php
+if (isset($_GET['error'])) {
+?>
+    <div class="alert alert-danger container my-4" role="alert">
+        <?php echo "ERROR: " . $_GET['error']; ?>
+    </div>
+<?php
+}
+?>
 <!-- Edit Names -->
 <div class="modal fade" id="editNamesModal" tabindex="-1" role="dialog" aria-labelledby="editNamesModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -56,7 +67,7 @@ foreach ($userDetails as $details) {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="email" class="col-form-label">E-mail:</label>
-                        <input type="text" class="form-control email" id="email" name="email" value="<?php echo $details["user_email"]; ?>">
+                        <input type="email" class="form-control email" id="email" name="email" value="<?php echo $details["user_email"]; ?>">
                     </div>
                 </div>
                 <div class="modal-footer">

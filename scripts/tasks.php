@@ -11,7 +11,7 @@ if (isset($_POST["saveTask"])) {
     $endDate = $_POST["end"];
 
     if ($startDate >= $endDate) {
-        header("location: ../kanban.php?error=invaliddates");
+        header("location: ../kanban.php?error=Invalid Dates");
         exit();
     };
 
@@ -26,7 +26,7 @@ if (isset($_POST["saveTask"])) {
     $endDate = $_POST["task-end"];
 
     if ($startDate >= $endDate) {
-        header("location: ../kanban.php?error=invaliddates");
+        header("location: ../kanban.php?error=Invalid Dates");
         exit();
     };
 

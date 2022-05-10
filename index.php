@@ -21,6 +21,18 @@
 </head>
 
 <body>
+    <!-- error message -->
+    <?php
+    if (isset($_GET['error'])) {
+    ?>
+        <div class="alert alert-danger container my-4" role="alert">
+            <?php echo "ERROR: " . $_GET['error']; ?>
+        </div>
+    <?php
+    }
+    ?>
+
+
     <div class="container mt-4">
         <div class="row gx-lg-5 align-items-center justify-content-center">
             <div class="col-8">

@@ -24,7 +24,7 @@ if (isset($_SESSION['projectid'])) {
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
             </div>
-            <form action="scripts/projects.php" method="post" id="newProjectForm" class="was-validated">
+            <form action="scripts/projects.php" method="post" id="newProjectForm">
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -45,7 +45,7 @@ if (isset($_SESSION['projectid'])) {
 
                         <div class="col">
                             <label>End Date:</label>
-                            <input type="date" class="form-control" id="projectEnd" name="projectEnd" value="<?php echo date('Y-m-d'); ?>" required>
+                            <input type="date" class="form-control" id="projectEnd" name="projectEnd" value="<?php echo date('Y-m-d', strtotime('tomorrow')); ?>" required>
                         </div>
 
                     </div>

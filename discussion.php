@@ -11,6 +11,16 @@ include_once 'navbar.php';
 
 ?>
 
+<!-- error message -->
+<?php
+if (isset($_GET['error'])) {
+?>
+    <div class="alert alert-danger container my-4" role="alert">
+        <?php echo "ERROR: " . $_GET['error']; ?>
+    </div>
+<?php
+}
+?>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Disucssion</h1>
@@ -70,58 +80,60 @@ include_once 'navbar.php';
 
 <?php
 $posts = getAllDiscussions();
-foreach ($posts as $post) {
-    if (userCreatedCurrentProject() == TRUE || $_SESSION["user_id"] == $post["creator_id"]) {
-        echo "<style>.hide{display:block}</style>";
-    }
+if (isset($posts)) {
+    foreach ($posts as $post) {
+        if (userCreatedCurrentProject() == TRUE || $_SESSION["user_id"] == $post["creator_id"]) {
+            echo "<style>.hide{display:block}</style>";
+        }
 ?>
 
-    <div class="row-6 d-flex mt-2">
-        <div>
-            <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $post["user_name"]  . " " . $post["user_surname"] ?>"><?php echo $post["user_name"][0] . $post["user_surname"][0] ?></div>
-        </div>
-        <div class="card flex-grow-1 ">
-            <div class="card-body d-flex ">
-                <div class="flex-grow-1">
-                    <?php echo $post['dis_content'] ?>
-                </div>
-                <a href="scripts/discussion.php?del_post_id=<?php echo $post['id'] ?>" class="hide" data-toggle="tooltip" title="Delete Post"><i class="bi bi-trash"></i></a>
+        <div class="row-6 d-flex mt-2">
+            <div>
+                <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $post["user_name"]  . " " . $post["user_surname"] ?>"><?php echo $post["user_name"][0] . $post["user_surname"][0] ?></div>
             </div>
-            <div class="mx-5">
-                <div class="card-body ">
-                    <?php
-                    $replys = getAllReply($post["id"]);
-                    if (isset($replys)) {
-                        foreach ($replys as $reply) {
+            <div class="card flex-grow-1 ">
+                <div class="card-body d-flex ">
+                    <div class="flex-grow-1">
+                        <?php echo $post['dis_content'] ?>
+                    </div>
+                    <a href="scripts/discussion.php?del_post_id=<?php echo $post['id'] ?>" class="hide" data-toggle="tooltip" title="Delete Post"><i class="bi bi-trash"></i></a>
+                </div>
+                <div class="mx-5">
+                    <div class="card-body ">
+                        <?php
+                        $replys = getAllReply($post["id"]);
+                        if (isset($replys)) {
+                            foreach ($replys as $reply) {
 
-                    ?>
-                            <div class="d-flex card-body border-top">
-                                <div>
-                                    <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $reply["user_name"]  . " " . $reply["user_surname"] ?>"><?php echo $reply["user_name"][0] . $reply["user_surname"][0] ?></div>
+                        ?>
+                                <div class="d-flex card-body border-top">
+                                    <div>
+                                        <div class="circle-around" data-toggle="tooltip" data-placement="bottom" title="<?php echo $reply["user_name"]  . " " . $reply["user_surname"] ?>"><?php echo $reply["user_name"][0] . $reply["user_surname"][0] ?></div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <?php echo $reply["reply_content"] ?>
+                                    </div>
+                                    <?php
+                                    if (userCreatedCurrentProject() == TRUE || $_SESSION["user_id"] == $reply["creator_id"]) {
+                                        echo "<a href='scripts/discussion.php?del_reply_id=" . $reply['id'] . " data-toggle='tooltip' title='Delete Reply'><i class='bi bi-trash'></i></a>";
+                                    }
+
+                                    ?>
+
                                 </div>
-                                <div class="flex-grow-1">
-                                    <?php echo $reply["reply_content"] ?>
-                                </div>
-                                <?php
-                                if (userCreatedCurrentProject() == TRUE || $_SESSION["user_id"] == $reply["creator_id"]) {
-                                    echo "<a href='scripts/discussion.php?del_reply_id=" . $reply['id'] . " data-toggle='tooltip' title='Delete Reply'><i class='bi bi-trash'></i></a>";
-                                }
-
-                                ?>
-
-                            </div>
-                    <?php
-                        }
-                    } ?>
-                    <div class="pt-2">
-                        <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#postReplyModal" data-post="<?php echo $post["id"]; ?>"><span class="bi bi-plus white">Reply</span></button>
+                        <?php
+                            }
+                        } ?>
+                        <div class="pt-2">
+                            <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#postReplyModal" data-post="<?php echo $post["id"]; ?>"><span class="bi bi-plus white">Reply</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 <?php
+    }
 }
 ?>
 

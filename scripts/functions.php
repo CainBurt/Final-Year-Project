@@ -30,10 +30,10 @@ function createTask($conn, $taskTitle, $taskLabelId, $start, $end)
 
     if (mysqli_query($conn, $sql)) {
         // header("location: ../kanban.php?error=none&message=createsuccess");
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?message=createsuccess");
         exit();
     } else {
-        header("location: ../kanban.php?errortasknotadded");
+        header("location: ../kanban.php?error=Task Not Added");
         exit();
     };
 };
@@ -45,10 +45,10 @@ function updateTask($conn, $taskId, $updatedTitle, $start, $end)
 
     if (mysqli_query($conn, $query)) {
         // header("location: ../kanban.php?error=none&message=editsuccess");
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=editsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?message=editsuccess");
         exit();
     } else {
-        header("location: ../kanban.php.php?error=tasknotupdated");
+        header("location: ../kanban.php.php?error=Task Not Updated");
         exit();
     };
 }
@@ -59,10 +59,10 @@ function deleteTask($conn, $taskId)
     $query = "DELETE FROM tbl_tasks WHERE id='$taskId';";
     if (mysqli_query($conn, $query)) {
         // header("location: ../kanban.php?error=none&message=deletesuccess");
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=deletesuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?message=deletesuccess");
         exit();
     } else {
-        header("location: ../kanban.php.php?error=tasknotdeleted");
+        header("location: ../kanban.php.php?error=Task Not Deleted");
         exit();
     };
 }
@@ -78,7 +78,7 @@ function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectE
         // header("location: ../projects.php?error=none&message=createprojectsuccess");
         exit();
     } else {
-        header("location: ../projects.php?error=projectnotadded");
+        header("location: ../projects.php?error=Project Not Created");
         exit();
     };
 };
@@ -89,10 +89,10 @@ function deleteProject($conn, $projectId)
     $query = "DELETE FROM tbl_projects WHERE id='$projectId';";
 
     if (mysqli_query($conn, $query)) {
-        header("location: ../projects.php?error=none&message=projectdeleted");
+        header("location: ../projects.php?message=projectdeleted");
         exit();
     } else {
-        header("location: ../projects.php?error=projectnotdeleted");
+        header("location: ../projects.php?error=Project Not Deleted");
         exit();
     };
 };
@@ -102,10 +102,10 @@ function updateProject($conn, $id, $title, $desc, $start, $end)
 {
     $query = "UPDATE tbl_projects SET project_name='$title', project_description='$desc', project_start='$start', project_end='$end' WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../projects.php?error=none&message=projectupdated");
+        header("location: ../projects.php?message=projectupdated");
         exit();
     } else {
-        header("location: ../projects.php?error=projectnotupdated");
+        header("location: ../projects.php?error=Project Not Updated");
         exit();
     };
 }
@@ -159,10 +159,10 @@ function createUser($conn, $name, $surname, $email, $password)
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO tbl_users(user_name, user_surname, user_email, user_password) VALUES ('$name', '$surname', '$email', '$hash');";
     if (mysqli_query($conn, $query)) {
-        header("location: ../?error=none&message=accountcreated");
+        header("location: ../?message=accountcreated");
         exit();
     } else {
-        header("location: ../?error=couldnotcreateaccount");
+        header("location: ../?error=Could Not Create Account");
         exit();
     };
 }
@@ -175,7 +175,7 @@ function loginUser($conn, $email, $password)
     // check email exists
     $emailExists = emailExists($conn, $email);
     if ($emailExists === false) {
-        header("location: ../?error=emailisfalse");
+        header("location: ../?error=Email and Password Combination Does not Exist");
     };
 
     // check password matches hashed password
@@ -184,7 +184,7 @@ function loginUser($conn, $email, $password)
 
     if ($checkpassword === false) {
 
-        header("location: ../?error=passwordisfalse");
+        header("location: ../?error=Email and Password Combination Does not Exist");
     } else if ($checkpassword == true) {
 
         session_start();
@@ -202,10 +202,10 @@ function addUserToProject($conn, $project_id, $userData)
     // TODO a check to make sure a user isnt already added.
     $query = "INSERT INTO usersaddedtoprojects(user_id, project_id) VALUES ('$user_id', '$project_id');";
     if (mysqli_query($conn, $query)) {
-        header("location: ../projectsettings.php?error=none&message=useradded");
+        header("location: ../projectsettings.php?message=useradded");
         exit();
     } else {
-        header("location: ../?error=couldnotadduser");
+        header("location: ../?error=Could Not Add User");
         exit();
     };
 }
@@ -215,10 +215,10 @@ function addUserToProjectOnCreate($conn, $project_id, $user_id)
 {
     $query = "INSERT INTO usersaddedtoprojects(user_id, project_id) VALUES ('$user_id', '$project_id');";
     if (mysqli_query($conn, $query)) {
-        header("location: ../projects.php?error=none&message=useradded");
+        header("location: ../projects.php?message=useradded");
         exit();
     } else {
-        header("location: ../?error=couldnotadduser");
+        header("location: ../?error=Could Not Add User");
         exit();
     };
 }
@@ -228,10 +228,10 @@ function removeUserProject($conn, $userId, $projectId)
 {
     $query = "DELETE FROM usersaddedtoprojects WHERE project_id='$projectId' AND user_id = '$userId';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../projectsettings.php?error=none&message=userremoved");
+        header("location: ../projectsettings.php?message=userremoved");
         exit();
     } else {
-        header("location: ../projectsettings.php?error=couldnotremoveuser");
+        header("location: ../projectsettings.php?error=Could Not Remove User");
         exit();
     };
 }
@@ -241,10 +241,10 @@ function leaveProject($conn, $userId, $projectId)
 {
     $query = "DELETE FROM usersaddedtoprojects WHERE project_id='$projectId' AND user_id = '$userId';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../projects.php?error=none&message=userremoved");
+        header("location: ../projects.php?message=userremoved");
         exit();
     } else {
-        header("location: ../projects.php?error=couldnotremoveuser");
+        header("location: ../projects.php?error=Could Not Remove User");
         exit();
     };
 }
@@ -255,10 +255,10 @@ function createSubtask($conn, $taskId, $subtask)
     $query = "INSERT INTO tbl_subtasks(sub_name, sub_status, task_id) VALUES ('$subtask', 0 , '$taskId');";
 
     if (mysqli_query($conn, $query)) {
-        header("location: ../tasks.php?error=none&message=createsubtasksuccess");
+        header("location: ../tasks.php?message=createsubtasksuccess");
         exit();
     } else {
-        header("location: ../tasks.php?errorsubtasknotadded");
+        header("location: ../tasks.php?error=Subtask Not Added");
         exit();
     };
 }
@@ -269,10 +269,10 @@ function updateSubtask($conn, $taskId, $updatedTitle)
     $query = "UPDATE tbl_subtasks SET sub_name='$updatedTitle' WHERE id='$taskId';";
 
     if (mysqli_query($conn, $query)) {
-        header("location: ../tasks.php?error=none&message=editsuccess");
+        header("location: ../tasks.php?message=editsuccess");
         exit();
     } else {
-        header("location: ../tasks.php.php?error=tasknotupdated");
+        header("location: ../tasks.php.php?error=Task Not Updated");
         exit();
     };
 }
@@ -282,10 +282,10 @@ function deleteSubtask($conn, $taskId)
 {
     $query = "DELETE FROM tbl_subtasks WHERE id='$taskId';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../tasks.php?error=none&message=deletesuccess");
+        header("location: ../tasks.php?message=deletesuccess");
         exit();
     } else {
-        header("location: ../tasks.php?error=tasknotdeleted");
+        header("location: ../tasks.php?error=Task Not Deleted");
         exit();
     };
 }
@@ -299,10 +299,10 @@ function changeUserInTask($conn, $taskId, $userId)
     $query = "UPDATE tbl_tasks SET assigned_user_id='$userId' WHERE id='$taskId';";
 
     if (mysqli_query($conn, $query)) {
-        header("location: ../tasks.php?error=none&message=changeusersuccess");
+        header("location: ../tasks.php?message=changeusersuccess");
         exit();
     } else {
-        header("location: ../tasks.php.php?error=changeusernotupdated");
+        header("location: ../tasks.php.php?error=Change User Not Updated");
         exit();
     };
 }
@@ -326,10 +326,10 @@ function changeUserName($conn, $id, $name, $surname)
 {
     $query = "UPDATE tbl_users SET user_name='$name', user_surname='$surname' WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../profile.php?error=none&message=namechangesuccess");
+        header("location: ../profile.php?message=namechangesuccess");
         exit();
     } else {
-        header("location: ../profile.php.php?error=changeusernamenotupdated");
+        header("location: ../profile.php.php?error=Change User Name Not Updated");
         exit();
     };
 }
@@ -338,10 +338,10 @@ function changeUserEmail($conn, $id, $email)
 {
     $query = "UPDATE tbl_users SET user_email='$email' WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../profile.php?error=none&message=emailchangesuccess");
+        header("location: ../profile.php?message=emailchangesuccess");
         exit();
     } else {
-        header("location: ../profile.php.php?error=changeuseremailnotupdated");
+        header("location: ../profile.php.php?error=Change User Email Not Updated");
         exit();
     };
 }
@@ -352,10 +352,10 @@ function changeUserPassword($conn, $id, $password)
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $query = "UPDATE tbl_users SET user_password='$hash' WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../profile.php?error=none&message=passwordchangesuccess");
+        header("location: ../profile.php?message=passwordchangesuccess");
         exit();
     } else {
-        header("location: ../profile.php.php?error=changeuserpasswordnotupdated");
+        header("location: ../profile.php.php?error=Change User Password Not Updated");
         exit();
     };
 }
@@ -364,10 +364,10 @@ function deleteUserAccount($conn, $id)
 {
     $query = "DELETE FROM tbl_users WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../index.php?error=none&message=accountdeletesuccess");
+        header("location: ../index.php?message=accountdeletesuccess");
         exit();
     } else {
-        header("location: ../profile.php?error=couldnotdeleteaccount");
+        header("location: ../profile.php?error=Could Not Delete Account");
         exit();
     };
 }
@@ -439,10 +439,10 @@ function uploadFile($conn, $filename, $size, $projectId, $uploader_id)
 {
     $query = "INSERT INTO tbl_files (filename, filesize, uploader_id, project_id) VALUES ('$filename', '$size', '$uploader_id', '$projectId')";
     if (mysqli_query($conn, $query)) {
-        header("location: ../files.php?error=none&message=uploadedfile");
+        header("location: ../files.php?message=uploadedfile");
         exit();
     } else {
-        header("location: ../files.php?error=couldnotuploadfile");
+        header("location: ../files.php?error=Could Not Upload File");
         exit();
     };
 }
@@ -473,10 +473,10 @@ function deleteFile($conn, $id)
 {
     $query = "DELETE FROM tbl_files WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: ../fyp/files.php?error=none&message=deletesuccess");
+        header("location: ../fyp/files.php?message=deletesuccess");
         exit();
     } else {
-        header("location: ../files.php?error=filenotdeleted");
+        header("location: ../files.php?error=File Not Deleted");
         exit();
     };
 }
@@ -488,10 +488,10 @@ function createDiscussion($conn, $content)
     $sql = "INSERT INTO tbl_discussion(dis_content, project_id, creator_id) VALUES ('$content', '$project', '$userId');";
 
     if (mysqli_query($conn, $sql)) {
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?message=createpostsuccess");
         exit();
     } else {
-        header("location: ../discussion.php?errorpostnotadded");
+        header("location: ../discussion.php?error= Post Could Not be Created");
         exit();
     };
 }
@@ -515,10 +515,10 @@ function createReply($conn, $content, $discussionId)
     $sql = "INSERT INTO tbl_reply(reply_content, discussion_id, creator_id) VALUES ('$content', '$discussionId', '$userId');";
 
     if (mysqli_query($conn, $sql)) {
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?message=createpostsuccess");
         exit();
     } else {
-        header("location: ../discussion.php?errorpostnotadded");
+        header("location: ../discussion.php?error= Reply Could not be Created");
         exit();
     };
 }
@@ -539,10 +539,10 @@ function deleteDiscussion($conn, $id)
 {
     $query = "DELETE FROM tbl_discussion WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?message=createpostsuccess");
         exit();
     } else {
-        header("location: ../fyp/discussion.php?error=postnotdeleted");
+        header("location: ../fyp/discussion.php?error=Post Could Not be Deleted");
         exit();
     };
 }
@@ -551,10 +551,10 @@ function deleteReply($conn, $id)
 {
     $query = "DELETE FROM tbl_reply WHERE id='$id';";
     if (mysqli_query($conn, $query)) {
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=none&message=createpostsuccess");
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?message=createpostsuccess");
         exit();
     } else {
-        header("location: ../fyp/discussion.php?error=replynotdeleted");
+        header("location: ../fyp/discussion.php?error=Reply Could Not be Deletd");
         exit();
     };
 }

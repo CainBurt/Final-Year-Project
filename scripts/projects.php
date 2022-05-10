@@ -25,7 +25,7 @@ if (isset($_POST["saveProject"])) {
     $start = $_POST["projectStart"];
     $end = $_POST["projectEnd"];
     if ($start >= $end) {
-        header("location: ../projects.php?error=invaliddates");
+        header("location: ../projects.php?error=Invalid Dates");
         exit();
     };
     updateProject(OpenCon(), $id, $title, $desc, $start, $end);
@@ -49,7 +49,7 @@ if (isset($_POST["saveProject"])) {
         addUserToProject(OpenCon(), $project_id, $emailExists);
         CloseCon($conn);
     } else {
-        header("location: ../kanban.php?error=emaildoesntexist");
+        header("location: ../kanban.php?error=Email Deos Not Exist");
         exit();
     }
 } else if (isset($_POST["removeUser"])) {

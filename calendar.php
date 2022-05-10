@@ -25,6 +25,17 @@ include_once 'navbar.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script> -->
 
 
+<!-- error message -->
+<?php
+if (isset($_GET['error'])) {
+?>
+    <div class="alert alert-danger container my-4" role="alert">
+        <?php echo "ERROR: " . $_GET['error']; ?>
+    </div>
+<?php
+}
+?>
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Calendar</h1>
     <button class="btn rounded-pill red new-project-btn" data-toggle="modal" data-target="#createTaskModal"><span class="bi bi-plus white">New Task</span></button>
@@ -56,7 +67,7 @@ include_once 'navbar.php';
 
                         <div class="col">
                             <label>End Date:</label>
-                            <input type="date" class="form-control" id="end" name="end" value="<?php echo date('Y-m-d'); ?>" required>
+                            <input type="date" class="form-control" id="end" name="end" value="<?php echo date('Y-m-d', strtotime('tomorrow')); ?>" required>
                         </div>
 
                     </div>

@@ -25,7 +25,7 @@ if (isset($_POST["createAccount"])) {
 
     loginUser(OpenCon(), $email, $password);
     CloseCon($conn);
-} elseif (isset($_POST["editNames"])) {
+} elseif (isset($_POST["editNames"])) { //edit user details - profile page
     $id = $user = $_SESSION["user_id"];
     $name = sanitiseInputs($_POST["name"]);
     $surname = sanitiseInputs($_POST["surname"]);

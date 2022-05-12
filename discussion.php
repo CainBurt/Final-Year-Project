@@ -79,6 +79,7 @@ if (isset($_GET['error'])) {
 </div>
 
 <?php
+//displays all posts if there are any
 $posts = getAllDiscussions();
 if (isset($posts)) {
     foreach ($posts as $post) {
@@ -101,6 +102,7 @@ if (isset($posts)) {
                 <div class="mx-5">
                     <div class="card-body ">
                         <?php
+                        //displays all replies if there are any
                         $replys = getAllReply($post["id"]);
                         if (isset($replys)) {
                             foreach ($replys as $reply) {

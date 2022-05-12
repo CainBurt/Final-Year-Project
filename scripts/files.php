@@ -2,6 +2,7 @@
 require_once 'db_connection.php';
 require_once 'functions.php';
 
+// saves files
 if (isset($_POST['uploadFile'])) {
     $filename = $_FILES['file']['name'];
     $destination = $_SERVER['DOCUMENT_ROOT'] . '/fyp/uploads/' . $filename;
@@ -15,11 +16,11 @@ if (isset($_POST['uploadFile'])) {
 
     // check file format
     if (!in_array($extension, ['zip', 'pdf', 'png', 'txt', '.doc'])) {
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=Your file must be a .zip, .pdf .png .txt or .doc");
+        header("location: ../files.php?error=Your file must be a .zip, .pdf .png .txt or .doc");
     } elseif ($_FILES['file']['size'] > 100000) {
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=Your file is too large");
+        header("location: ../files.php?error=Your file is too large");
     } elseif (file_exists($destination)) {
-        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=File already exists");
+        header("location: ../files.php?error=File already exists");
     } else {
         if (move_uploaded_file($file, $destination)) {
             uploadFile(OpenCon(), $filename, $size, $projectId, $uploader_id);
@@ -28,6 +29,7 @@ if (isset($_POST['uploadFile'])) {
     }
 }
 
+// gets all the files
 if (isset($_GET['file_id'])) {
     $id = $_GET['file_id'];
     $file = getFileForDownload(OpenCon(), $id);
@@ -47,6 +49,7 @@ if (isset($_GET['file_id'])) {
     }
 }
 
+// deletes file
 if (isset($_GET['del_file_id'])) {
     $id = $_GET['del_file_id'];
     $file = getFileForDownload(OpenCon(), $id);

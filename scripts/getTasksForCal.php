@@ -1,4 +1,5 @@
 <?php
+// gets all the tasks for the calendar
 require_once 'db_connection.php';
 require_once 'functions.php';
 

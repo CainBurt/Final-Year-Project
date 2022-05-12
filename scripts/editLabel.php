@@ -1,4 +1,5 @@
 <?php
+// for changing the label on kanban drag and drop
 require "tasks.php";
 
 $label_id = $_GET["label_id"];

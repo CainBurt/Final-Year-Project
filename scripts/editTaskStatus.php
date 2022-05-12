@@ -1,4 +1,5 @@
 <?php
+// edits the task status on checkbox click
 require "tasks.php";
 
 $task_status = $_GET["status"];

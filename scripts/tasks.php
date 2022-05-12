@@ -3,7 +3,7 @@ require_once 'db_connection.php';
 require_once 'functions.php';
 
 
-if (isset($_POST["saveTask"])) {
+if (isset($_POST["saveTask"])) { //creates a task
 
     $taskTitle = $_POST["task"];
     $taskLabelId = $_POST["list"];
@@ -18,7 +18,7 @@ if (isset($_POST["saveTask"])) {
     createTask(OpenCon(), $taskTitle, $taskLabelId, $startDate, $endDate);
     CloseCon($conn);
     exit();
-} elseif (isset($_POST["editTask"])) {
+} elseif (isset($_POST["editTask"])) { //edits a task
 
     $taskId = $_POST["task-id"];
     $updatedTitle = $_POST["task-title"];
@@ -33,7 +33,7 @@ if (isset($_POST["saveTask"])) {
     updateTask(OpenCon(), $taskId, $updatedTitle, $startDate, $endDate);
     CloseCon($conn);
     exit();
-} elseif (isset($_POST["deleteTask"])) {
+} elseif (isset($_POST["deleteTask"])) { //deletes a task
     $taskId = $_POST["task-id"];
     deleteTask(OpenCon(), $taskId);
     CloseCon($conn);
@@ -42,24 +42,25 @@ if (isset($_POST["saveTask"])) {
     $subtask = sanitiseInputs($_POST["subtaskname"]);
     createSubtask(OpenCon(), $taskId, $subtask);
     CloseCon($conn);
-} elseif (isset($_POST["editSubtask"])) {
+} elseif (isset($_POST["editSubtask"])) { //edits a subtask
 
     $taskId = $_POST["task-id"];
     $updatedTitle = $_POST["task-title"];
     updateSubtask(OpenCon(), $taskId, $updatedTitle);
     CloseCon($conn);
     exit();
-} elseif (isset($_POST["deleteSubtask"])) {
+} elseif (isset($_POST["deleteSubtask"])) { //deletes a subtask
     $taskId = $_POST["task-id"];
     deleteSubtask(OpenCon(), $taskId);
     CloseCon($conn);
-} elseif (isset($_POST["changeUser"])) {
+} elseif (isset($_POST["changeUser"])) { //change the user assigned to a task
     $taskId = $_POST["task-id"];
     $userId = $_POST["user"];
 
     changeUserInTask(OpenCon(), $taskId, $userId);
     CloseCon($conn);
 } else {
+    // functions the display php pages can use
     function getAllLabels()
     {
         $query = "SELECT * FROM tbl_labels";

@@ -17,7 +17,7 @@ if (isset($_POST["saveProject"])) {
     saveProject(OpenCon(), $projectName, $projectDesc, $projectStart, $projectEnd, $creatorId);
     CloseCon($conn);
     exit();
-} else if (isset($_POST["saveEditProject"])) {
+} else if (isset($_POST["saveEditProject"])) { //saves an edit to the project
     $id = $_POST["projectId"];
     $title = $_POST["projectName"];
     $desc = $_POST["projectDesc"];
@@ -29,7 +29,7 @@ if (isset($_POST["saveProject"])) {
     };
     updateProject(OpenCon(), $id, $title, $desc, $start, $end);
     CloseCon($conn);
-} else if (isset($_POST["deleteProject"])) {
+} else if (isset($_POST["deleteProject"])) { //deletes the project
 
     $projectId = $_POST["delProjectId"];
     deleteProject(OpenCon(), $projectId);
@@ -39,7 +39,7 @@ if (isset($_POST["saveProject"])) {
     $_SESSION['projectid'] = $_GET["projectid"];
     $_SESSION['projectname'] = $_GET["projectname"];
     header("location: ../kanban.php?projectvarinsession");
-} else if (isset($_POST["addUserToProject"])) {
+} else if (isset($_POST["addUserToProject"])) { //adds a user to the project
     $email = sanitiseInputs($_POST["user-email"]);
     $emailExists = emailExists(OpenCon(), $email);
     $project_id = $_SESSION['projectid'];
@@ -51,7 +51,7 @@ if (isset($_POST["saveProject"])) {
         header("location: ../kanban.php?error=Email Deos Not Exist");
         exit();
     }
-} else if (isset($_POST["removeUser"])) {
+} else if (isset($_POST["removeUser"])) { //removes a user from the project
 
     $userId = $_POST["userId"];
     $projectId = $_SESSION['projectid'];
@@ -64,6 +64,7 @@ if (isset($_POST["saveProject"])) {
     leaveProject(OpenCon(), $userId, $projectId);
     CloseCon($conn);
 } else {
+    // functions the display php pages can use
     function getAllProjects()
     {
         $creatorId = $_SESSION['user_id'];

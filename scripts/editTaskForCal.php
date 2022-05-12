@@ -1,4 +1,5 @@
 <?php
+//updates the task dates on drag and drop or move task in the calendar
 require_once 'db_connection.php';
 require_once 'functions.php';
 

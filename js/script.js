@@ -1,13 +1,9 @@
 $(document).ready(function() {
-    // SidebarCollapse();
-
     //shows the create task modal and puts data into the inputs
     $("#taskModal").on("show.bs.modal", function(event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var list = button.data("list"); // Extract info from data-* attributes
+        var button = $(event.relatedTarget);
+        var list = button.data("list");
         var listName = button.data("name")
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this);
         modal.find(".modal-title").text("Add a Task to " + listName + " list?");
         modal.find(".modal-body input.list-name").val(list);
@@ -166,9 +162,7 @@ $(document).on('click', '#subtask_status', function() {
 
     $.ajax({
         url: url + "?status=" + status + "&subtask_id=" + subtask,
-        success: function() {
-            // alert("changed subtask statys");
-        }
+        success: function() {}
     });
 });
 //gets the id of task on click
@@ -229,6 +223,7 @@ $(function() {
 
 });
 
+// show bootstrap tooltips
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 })

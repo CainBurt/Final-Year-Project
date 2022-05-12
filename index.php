@@ -64,14 +64,6 @@
                                     <label class="form-label" for="loginPassword">Password</label>
                                 </div>
 
-                                <!-- Checkbox -->
-                                <!-- <div class="">
-                                    <div class="form-check mb-3 mb-md-0">
-                                        <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-                                        <label class="form-check-label" for="loginCheck"> Remember me </label>
-                                    </div>
-                                </div> -->
-
                                 <!-- Submit button -->
                                 <div class="d-flex">
                                     <button type="submit" class="btn btn-danger flex-grow-1" name="login">Sign in</button>

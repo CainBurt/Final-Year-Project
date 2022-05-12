@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// print to console
+// debug print to console
 function debug_to_console($data)
 {
     $output = $data;
@@ -29,7 +29,6 @@ function createTask($conn, $taskTitle, $taskLabelId, $start, $end)
     $sql = "INSERT INTO tbl_tasks(title, label_id, task_start, task_end, project_id) VALUES ('$taskTitle', '$taskLabelId', '$start', '$end', '$project');";
 
     if (mysqli_query($conn, $sql)) {
-        // header("location: ../kanban.php?error=none&message=createsuccess");
         header("location: " . $_SERVER['HTTP_REFERER'] . "?message=createsuccess");
         exit();
     } else {
@@ -44,7 +43,6 @@ function updateTask($conn, $taskId, $updatedTitle, $start, $end)
     $query = "UPDATE tbl_tasks SET title='$updatedTitle', task_start='$start', task_end='$end' WHERE id='$taskId';";
 
     if (mysqli_query($conn, $query)) {
-        // header("location: ../kanban.php?error=none&message=editsuccess");
         header("location: " . $_SERVER['HTTP_REFERER'] . "?message=editsuccess");
         exit();
     } else {
@@ -58,7 +56,6 @@ function deleteTask($conn, $taskId)
 {
     $query = "DELETE FROM tbl_tasks WHERE id='$taskId';";
     if (mysqli_query($conn, $query)) {
-        // header("location: ../kanban.php?error=none&message=deletesuccess");
         header("location: " . $_SERVER['HTTP_REFERER'] . "?message=deletesuccess");
         exit();
     } else {
@@ -75,7 +72,6 @@ function saveProject($conn, $projectName, $projectDesc, $projectStart, $projectE
     if (mysqli_query($conn, $sql)) {
         $GET_last_ID = mysqli_insert_id($conn);
         addUserToProjectOnCreate($conn, $GET_last_ID, $creatorId);
-        // header("location: ../projects.php?error=none&message=createprojectsuccess");
         exit();
     } else {
         header("location: ../projects.php?error=Project Not Created");
@@ -125,7 +121,6 @@ function emailExists($conn, $email)
     $resultData = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData)) {
-        //add some stuff here when get to login
         return $row;
     } else {
         $result = false;
@@ -198,8 +193,6 @@ function loginUser($conn, $email, $password)
 function addUserToProject($conn, $project_id, $userData)
 {
     $user_id = $userData["id"];
-
-    // TODO a check to make sure a user isnt already added.
     $query = "INSERT INTO usersaddedtoprojects(user_id, project_id) VALUES ('$user_id', '$project_id');";
     if (mysqli_query($conn, $query)) {
         header("location: ../projectsettings.php?message=useradded");
@@ -385,52 +378,45 @@ function userAlreadyAddedToProject($email)
     }
 };
 
+// check user created project by projectid and email
 function userCreatedProject($projectId, $email)
 {
-    // $query = "SELECT * FROM tbl_projects WHERE id='$project_id' AND creator_id='$user_id';";
     $query = "SELECT * FROM tbl_projects INNER JOIN tbl_users on tbl_users.id = tbl_projects.creator_id WHERE tbl_projects.id='$projectId' AND user_email='$email';";
     $result = mysqli_query(OpenCon(), $query);
 
     if (mysqli_num_rows($result) == 1) {
-        // echo "User Did created project"
         return TRUE;
     } else {
         return FALSE;
-        // echo "User didnt Created Project";
     }
 }
 
+// check user created project by projectid and id
 function userCreatedProjectById($projectId, $id)
 {
-    // $query = "SELECT * FROM tbl_projects WHERE id='$project_id' AND creator_id='$user_id';";
     $query = "SELECT * FROM tbl_projects INNER JOIN tbl_users on tbl_users.id = tbl_projects.creator_id WHERE tbl_projects.id='$projectId' AND tbl_users.id='$id';";
     $result = mysqli_query(OpenCon(), $query);
 
     if (mysqli_num_rows($result) >= 1) {
-        // echo "User Did created project"
         return TRUE;
     } else {
         return FALSE;
-        // echo "User didnt Created Project";
     }
 }
 
+// check user created project by id
 function createdCurrentProject($userid)
 {
-
     // get current project
     $project_id = $_SESSION['projectid'];
-
     // check if curent user created current project
     $query = "SELECT * FROM tbl_projects WHERE id='$project_id' AND creator_id='$userid';";
     $result = mysqli_query(OpenCon(), $query);
 
     if (mysqli_num_rows($result) !== 0) {
-        // echo "User Did Not create project"
         return TRUE;
     } else {
         return FALSE;
-        // echo "User Created Project";
     }
 }
 
@@ -461,6 +447,7 @@ function getAllFiles()
     }
 }
 
+// download the file
 function getFileForDownload($conn, $id)
 {
     $query = "SELECT * FROM tbl_files WHERE id='$id'";
@@ -469,6 +456,7 @@ function getFileForDownload($conn, $id)
     return $file;
 }
 
+// delete file
 function deleteFile($conn, $id)
 {
     $query = "DELETE FROM tbl_files WHERE id='$id';";
@@ -481,6 +469,7 @@ function deleteFile($conn, $id)
     };
 }
 
+// create post
 function createDiscussion($conn, $content)
 {
     $userId = $_SESSION["user_id"];
@@ -496,6 +485,7 @@ function createDiscussion($conn, $content)
     };
 }
 
+// get all posts
 function getAllDiscussions()
 {
     $project_id = $_SESSION['projectid'];
@@ -509,6 +499,7 @@ function getAllDiscussions()
     }
 }
 
+//create reply
 function createReply($conn, $content, $discussionId)
 {
     $userId = $_SESSION["user_id"];
@@ -523,6 +514,7 @@ function createReply($conn, $content, $discussionId)
     };
 }
 
+// get all replies
 function getAllReply($discussionId)
 {
     $query = "SELECT tbl_reply.id, reply_content, discussion_id, creator_id, user_name, user_surname FROM tbl_reply INNER JOIN tbl_users on  tbl_reply.creator_id = tbl_users.id WHERE discussion_id = '$discussionId';";
@@ -535,6 +527,7 @@ function getAllReply($discussionId)
     }
 }
 
+//delete post
 function deleteDiscussion($conn, $id)
 {
     $query = "DELETE FROM tbl_discussion WHERE id='$id';";
@@ -547,6 +540,7 @@ function deleteDiscussion($conn, $id)
     };
 }
 
+// delete replies
 function deleteReply($conn, $id)
 {
     $query = "DELETE FROM tbl_reply WHERE id='$id';";
@@ -559,6 +553,7 @@ function deleteReply($conn, $id)
     };
 }
 
+// users name by user id
 function getUserNameById($id)
 {
     $query = "SELECT user_name, user_surname FROM tbl_users WHERE id='$id'";

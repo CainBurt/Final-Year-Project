@@ -8,22 +8,11 @@ if (!isset($_SESSION['projectid'])) {
 ?>
 <?php
 include_once 'navbar.php';
-// include_once 'scripts/projects.php';
 ?>
 <link rel="stylesheet" href="fullcalendar/fullcalendar.min.css" />
 <script src="fullcalendar/lib/jquery.min.js"></script>
 <script src="fullcalendar/lib/moment.min.js"></script>
 <script src="fullcalendar/fullcalendar.min.js"></script>
-<!-- <script src="js/calendar.js"></script>-->
-
-<!-------- Full calendar cdn ------------->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script> -->
-
 
 <!-- error message -->
 <?php
@@ -88,6 +77,7 @@ if (isset($_GET['error'])) {
     <div id='calendar'></div>
 </div>
 <script>
+    // All calendar functionality
     $(document).ready(function() {
         var calendar = $("#calendar").fullCalendar({
             editable: true,
@@ -116,7 +106,6 @@ if (isset($_GET['error'])) {
                     },
                     success: function(data) {
                         calendar.fullCalendar("refetchEvents");
-                        // alert("Update completed")
                     }
                 })
             },
@@ -139,7 +128,6 @@ if (isset($_GET['error'])) {
                     },
                     success: function(data) {
                         calendar.fullCalendar("refetchEvents");
-                        // alert("Update completed")
                     }
                 })
             },

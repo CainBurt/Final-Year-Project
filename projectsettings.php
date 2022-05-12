@@ -50,7 +50,6 @@ include_once 'scripts/projects.php';
     $users = getAllUsersInProject();
     if ($users !== NULL) {
         foreach ($users as $user) {
-            // debug_to_console($user);
             $created = createdCurrentProject($user["id"]);
 
     ?>

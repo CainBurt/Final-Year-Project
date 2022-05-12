@@ -1,7 +1,6 @@
 <?php
 require_once 'db_connection.php';
 require_once 'functions.php';
-// session_start();
 // save project to database
 if (isset($_POST["saveProject"])) {
     $projectName = sanitiseInputs($_POST["projectName"]);
@@ -116,11 +115,9 @@ if (isset($_POST["saveProject"])) {
         $result = mysqli_query(OpenCon(), $query);
 
         if (mysqli_num_rows($result) !== 0) {
-            // echo "User Did Not create project"
             return TRUE;
         } else {
             return FALSE;
-            // echo "User Created Project";
         }
     }
 }

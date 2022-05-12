@@ -87,7 +87,7 @@
         left: 15px;
         width: 100%;
     }
-    /***** project border ****/
+    /***** project styling ****/
     
     .new-project {
         border: 4px dashed lightgray;
@@ -160,7 +160,7 @@
     #addedUser:hover>#showDelUserIcon {
         display: none;
     }
-    /* tasks */
+    /* tasks styling */
     
     .circle-around {
         background: #B20D30;
@@ -211,29 +211,11 @@
         background-color: rgba(182, 182, 182, 0.452);
     }
     /* calendar styling */
-    /*     
-    body {
-        margin-top: 50px;
-        text-align: center;
-        font-size: 12px;
-        font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-    } */
     
     #calendar {
         /* background-color: white; */
         margin: 0 auto;
     }
-    /* .response {
-        height: 60px;
-    }
-    
-    .success {
-        background: #cdf3cd;
-        padding: 10px 60px;
-        border: #c3e6c3 1px solid;
-        display: inline-block;
-    } */
-    /* discussion board styling */
     
     .hide,
     .hideReply {

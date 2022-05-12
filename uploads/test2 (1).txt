@@ -1,6 +1,0 @@
-<br />
-<b>Warning</b>:  Undefined array key "name" in <b>C:\xampp\htdocs\fyp\scripts\files.php</b> on line <b>44</b><br />
-<br />
-<b>Warning</b>:  Undefined array key "name" in <b>C:\xampp\htdocs\fyp\scripts\files.php</b> on line <b>46</b><br />
-<br />
-<b>Warning</b>:  readfile(C:/xampp/htdocs/fyp/uploads/): Failed to open stream: No such file or directory in <b>C:\xampp\htdocs\fyp\scripts\files.php</b> on line <b>46</b><br />

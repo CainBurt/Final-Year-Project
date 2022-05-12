@@ -15,13 +15,10 @@ if (isset($_POST['uploadFile'])) {
 
     // check file format
     if (!in_array($extension, ['zip', 'pdf', 'png', 'txt', '.doc'])) {
-        // echo "Your file must be a .zip, .pdf .png or .txt";
         header("location: " . $_SERVER['HTTP_REFERER'] . "?error=Your file must be a .zip, .pdf .png .txt or .doc");
-    } elseif ($_FILES['file']['size'] > 100000) { //check file size
-        // echo "Your file is too large";
+    } elseif ($_FILES['file']['size'] > 100000) {
         header("location: " . $_SERVER['HTTP_REFERER'] . "?error=Your file is too large");
     } elseif (file_exists($destination)) {
-        // echo "File already exists";
         header("location: " . $_SERVER['HTTP_REFERER'] . "?error=File already exists");
     } else {
         if (move_uploaded_file($file, $destination)) {
@@ -34,7 +31,6 @@ if (isset($_POST['uploadFile'])) {
 if (isset($_GET['file_id'])) {
     $id = $_GET['file_id'];
     $file = getFileForDownload(OpenCon(), $id);
-    // CloseCon($conn);
     $filepath = $_SERVER['DOCUMENT_ROOT'] . '/fyp/uploads/' . $file['filename'];
 
     if (file_exists($filepath)) {

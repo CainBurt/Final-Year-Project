@@ -6,7 +6,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 include_once 'navbar.php';
-// include_once 'scripts/projects.php';
 ?>
 <?php
 $userDetails = currentDetails();
@@ -194,6 +193,4 @@ if (isset($_GET['error'])) {
             </div>
         </div>
     </div>
-    <!-- verify user -->
-    <!-- if delete account, delete created projects and the user from projects added to -->
     <?php include_once 'footer.php' ?>

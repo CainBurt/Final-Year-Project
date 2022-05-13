@@ -17,7 +17,7 @@
     </link>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/form.js"></script>
+    <script src="js/script.js"></script>
 </head>
 
 <body>

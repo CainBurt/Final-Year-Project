@@ -37,11 +37,11 @@ if (isset($_GET['error'])) {
 
                     <div class="form-group">
                         <label for="name" class="col-form-label">First Name:</label>
-                        <input type="text" class="form-control name" id="name" name="name" value="<?php echo $details["user_name"]; ?>">
+                        <input type="text" class="form-control name" id="name" name="name" value="<?php echo $details["user_name"]; ?> " required>
                     </div>
                     <div class="form-group">
                         <label>Surname:</label>
-                        <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $details["user_surname"]; ?>">
+                        <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $details["user_surname"]; ?>" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -66,7 +66,7 @@ if (isset($_GET['error'])) {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="email" class="col-form-label">E-mail:</label>
-                        <input type="email" class="form-control email" id="email" name="email" value="<?php echo $details["user_email"]; ?>">
+                        <input type="email" class="form-control email" id="email" name="email" value="<?php echo $details["user_email"]; ?>" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -91,11 +91,11 @@ if (isset($_GET['error'])) {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="newPass" class="col-form-label">New Password:</label>
-                        <input type="password" class="form-control newPass" id="newPass" name="newPass" value="">
+                        <input type="password" class="form-control newPass" id="newPass" name="newPass" value="" required>
                     </div>
                     <div class="form-group">
                         <label for="newPassConfirm" class="col-form-label">New Password Confirm:</label>
-                        <input type="password" class="form-control newPassConfirm" id="newPassConfirm" name="newPassConfirm" value="">
+                        <input type="password" class="form-control newPassConfirm" id="newPassConfirm" name="newPassConfirm" value="" required>
                     </div>
                 </div>
                 <div class="modal-footer">
